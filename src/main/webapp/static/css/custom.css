@@ -1,0 +1,15 @@
+/*edit-form*/
+#edit-tab,#preview-tab {
+	padding: 5px;
+	border: 1px #999 solid;
+	margin: 0px;
+	display: block;
+	float: right;
+}
+
+pre.prettyprint{
+	margin-left: 40px;
+	margin-right: 20px;
+	padding-bottom: 20px;
+    background-color: #EEE;
+}

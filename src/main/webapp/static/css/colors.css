@@ -1,0 +1,351 @@
+/*
+    Colors for Confluence (included for all themes by default).
+*/
+
+
+h1, h2, h3, h4, h5, h6,
+.wiki-content h1,
+.wiki-content h2,
+.wiki-content h3,
+.wiki-content h4,
+.wiki-content h5,
+.wiki-content h6,
+.pagetitle,
+.steptitle,
+.substeptitle,
+.formtitle,
+a.blogHeading,
+.more-comments a,
+.label,
+label,
+th.confluenceTh,
+table.confluenceTable th.confluenceTh,
+table.admin th,
+.form-element-large,
+.form-element-small {
+    color: #003366;
+}
+
+.wiki-content h1,
+.wiki-content h2 {
+    border-bottom-color: #3c78b5;
+}
+
+.wiki-content-preview {
+    border-left-color: #3c78b5;
+    border-right-color: #3c78b5;
+}
+
+.pageSectionHeader {
+    border-bottom-color: #3c78b5;
+}
+
+.panel {
+    border-color: #3c78b5;
+}
+
+.helpheading,
+.panelHeader,
+.menuheading,
+#helpheading,
+.pageheader,
+.sectionbottom {
+    border-bottom-color: #3c78b5;
+}
+
+.topRow {
+    border-top-color: #3c78b5;
+}
+
+.tabletitle, .pageSectionHeader, .section-header h2, {
+    color: #003366;
+}
+.tabletitle, .pageSectionHeader {
+    border-bottom-color: #3c78b5;
+}
+
+a:link, a:visited, a:active, a:hover {
+    color: #003366;
+}
+
+h1 a:hover {
+    border-bottom-color: #003366;
+}
+
+/* use logoSpaceLink instead.
+.spacenametitle,
+.spacenametitle a,
+.spacenametitle a:visited {
+    color: #999999;
+}
+*/
+.spacenametitle-printable,
+.spacenametitle-printable a,
+.spacenametitle-printable a:visited {
+    color: #999999;
+}
+
+.navItemOver,
+.navItemOver a,
+.navItemOver a:visited,
+.navItemOver a:hover {
+    color: #ffffff;
+    background-color: #003366;
+}
+
+.navItem {
+    background-color: #3c78b5;
+}
+
+.navItem a,
+.navItem a:hover,
+.navItem a:visited {
+    color: #ffffff;
+}
+
+.tableview th {
+    color: #003366;
+    border-bottom-color: #3c78b5;
+}
+
+blockquote {
+    border-left-color: #3c78b5;
+}
+
+.navBackgroundBox {
+    background: #3c78b5;
+}
+
+.previewBoxTop,
+.previewContent,
+.previewBoxBottom,
+.functionbox {
+    border-color: #3c78b5;
+}
+
+.smalltext-blue {
+    color: #3c78b5;
+}
+
+.tabnav,
+.comment .tabnav,
+ul.tabnav {
+    border-bottom-color: #3c78b5;
+}
+
+.tabnav .tabs a {
+    border-color: #3c78b5;
+    background: #3c78b5;
+}
+
+.tabnav .tabs a:link, .tabnav .tabs a:visited {
+    color: #ffffff;
+}
+.tabnav .tabs a:hover {
+    color: #ffffff;
+    background: #003366;
+    border-color: #003366;
+}
+
+.tabnav .spaceActionLinks a:link,
+.tabnav .spaceActionLinks a:visited {
+    color: #003366;
+}
+
+.foldertab-box {
+    border-left-color: #3c78b5;
+    border-right-color: #3c78b5;
+    border-bottom-color: #3c78b5;
+}
+
+#squaretab a {
+    border-color: #3c78b5;
+}
+
+#squaretab a:link, #squaretab a:visited {
+    background-color: #3c78b5;
+}
+
+#squaretab a:hover {
+    color: #ffffff;
+    background-color: #003366;
+    border-color: #003366;
+}
+
+table.blogcalendar {
+    border-color: #3c78b5;
+}
+
+.blogcalendar th.calendarhead, a.calendarhead {
+    background-color: #3c78b5;
+}
+
+.searchGroupHeading {
+    background-color: #3c78b5;
+}
+
+.permissionTab {
+    background: #3c78b5;
+    color: #ffffff;
+}
+
+.permissionSuperTab {
+    background: #003366;
+    color: #ffffff;
+}
+
+/* styles for links in the top bar */
+.topBarDiv a:link,
+.topBarDiv a:visited,
+.topBarDiv a:active,
+.topBarDiv a:hover,
+.topBarDiv {
+    color: #ffffff;
+}
+
+.topBar {
+    background-color: #003366;
+}
+
+.basicPanelContainer {
+    border-color: #3c78b5;
+}
+
+.greynavbar {
+    border-top-color: #3c78b5
+}
+
+div.license-personal {
+   background-color: #003366;
+   color: #ffffff;
+}
+
+div.license-personal a {
+   color: #ffffff;
+}
+
+.minitab {
+    border-bottom-color: #3c78b5;
+}
+
+.minitab a {
+    border-top-color: #3c78b5;
+    border-right-color: #3c78b5;
+    border-left-color: #3c78b5;
+}
+
+.minitab .unselected {
+    border-bottom-color: #3c78b5;
+    background: #3c78b5;
+}
+
+#header {
+    background-color: #003366;
+}
+#header a,
+#breadcrumbs,
+#header .ajs-menu-bar li.ajs-menu-item a.trigger {
+    color: #ffffff;
+}
+.breadcrumbs {
+    border-color: $action.borderColor;
+}
+
+#navigation, #tab-navigation {
+    border-bottom-color: #3c78b5;
+}
+
+.ajs-menu-bar li.ajs-menu-item.opened .ajs-drop-down a {
+    color: #535353;
+}
+#header .ajs-menu-bar li.ajs-menu-item.opened .ajs-drop-down a {
+    color: #003366;
+}
+
+#navigation .ajs-menu-bar .ajs-button a:hover,
+.ajs-menu-bar li.ajs-menu-item.opened,
+.ajs-menu-bar .ajs-menu-item li.active a,
+.ajs-menu-bar li.ajs-menu-item.opened .ajs-drop-down li.active a,
+#header .ajs-menu-bar li.ajs-menu-item.opened .ajs-drop-down li.active a {
+    color: #ffffff;
+    background-color: #6699cc;
+}
+#header .ajs-menu-bar li.ajs-menu-item.opened,
+#header .ajs-menu-bar li.ajs-menu-item.opened a.trigger {
+    background-color: #336699;
+}
+.ajs-menu-bar li.ajs-menu-item.opened a.trigger {
+    background-color: #6699cc;
+}
+
+#header .ajs-drop-down {
+    border-color: #003366;
+}
+#header .ajs-menu-bar .ajs-drop-down li.separator {
+    border-top-color: #003366;
+}
+
+.tab-navigation .tab a {
+    background-color: #3c78b5;
+    border: 1px solid #3c78b5;
+    color: #ffffff;
+}
+.tab-navigation .tab a:hover {
+    color: #ffffff;
+    background-color: #003366;
+    border-bottom-color: #003366;
+}
+
+
+
+/***** Pre 2.8 markup styles for backwards compatability ******/
+#foldertab {
+    border-bottom-color: #3c78b5;
+}
+
+#foldertab li a {
+    border-color: #3c78b5;
+    background: #3c78b5;
+}
+
+#foldertab li a:link,
+#foldertab li a:visited {
+    color: #ffffff;
+}
+#foldertab li a:hover {
+    color: #ffffff;
+    background: #003366;
+    border-color: #003366;
+}
+
+.logoSpaceLink,
+.logoSpaceLink a:link,
+.logoSpaceLink a:visited,
+.logoSpaceLink a:active {
+    color: #999999;
+}
+
+.logoSpaceLink a:hover {
+    color: #003366;
+}
+
+.selectedminitab {
+    border-color: #3c78b5
+}
+
+.unselectedminitab {
+    border-color: #3c78b5;
+    background: #3c78b5;
+}
+
+.tabletitle {
+    color: #003366;
+}
+
+a.unselectedminitab:hover {
+    color: #ffffff;
+    background: #003366;
+    border-color: #003366;
+}
+
+/* End colour styles for Confluence */
