@@ -16,8 +16,8 @@ public class Index {
 
     @RequestMapping("/")
     public String index(Map<String, Object> models) {
-	models.put("wikiPages", wikiPageService.listRootWikiPages());
-	return "index";
+        models.put("wikiPages", wikiPageService.listRootWikiPages());
+        return "index";
 
     }
 }

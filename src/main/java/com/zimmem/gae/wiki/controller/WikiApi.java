@@ -16,11 +16,10 @@ public class WikiApi {
 
     @RequestMapping("/api-wiki/render")
     @ResponseBody
-    public String render(@RequestParam("wiki") String wiki)
-	    throws ParseException, IOException {
-	WikiEngine engine = new WikiEngine();
-	StringWriter writer = new StringWriter();
-	engine.render(wiki, writer);
-	return writer.toString();
+    public String render(@RequestParam("wiki") String wiki) throws ParseException, IOException {
+        WikiEngine engine = new WikiEngine();
+        StringWriter writer = new StringWriter();
+        engine.render(wiki, writer);
+        return writer.toString();
     }
 }

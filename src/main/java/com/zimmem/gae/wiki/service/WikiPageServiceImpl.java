@@ -16,51 +16,51 @@ public class WikiPageServiceImpl implements WikiPageService {
 
     @Override
     public void saveWikiPage(WikiPage wikiPage) {
-	Date now = new Date();
+        Date now = new Date();
 
-	if (wikiPage.getId() != null && wikiPage.getId() >= 0) {
-	    WikiPage old = findWikiPage(wikiPage.getId());
-	    if (old != null) {
-		old.setEditor(userService.getCurrentUser());
-		old.setModifiedTime(now);
-		old.setTitle(wikiPage.getTitle());
-		old.setWiki(wikiPage.getWiki());
-		old.setHtml(wikiPage.getHtml());
-		wikiPageDao.editWikiPage(old);
-	    } else {
-		wikiPage.setCreater(userService.getCurrentUser());
-		wikiPage.setCreateTime(now);
-		wikiPageDao.saveWikiPage(wikiPage);
-	    }
-	} else {
+        if (wikiPage.getId() != null && wikiPage.getId() >= 0) {
+            WikiPage old = findWikiPage(wikiPage.getId());
+            if (old != null) {
+                old.setEditor(userService.getCurrentUser());
+                old.setModifiedTime(now);
+                old.setTitle(wikiPage.getTitle());
+                old.setWiki(wikiPage.getWiki());
+                old.setHtml(wikiPage.getHtml());
+                wikiPageDao.editWikiPage(old);
+            } else {
+                wikiPage.setCreater(userService.getCurrentUser());
+                wikiPage.setCreateTime(now);
+                wikiPageDao.saveWikiPage(wikiPage);
+            }
+        } else {
 
-	    wikiPage.setCreater(userService.getCurrentUser());
-	    wikiPage.setCreateTime(now);
-	    wikiPageDao.saveWikiPage(wikiPage);
-	}
+            wikiPage.setCreater(userService.getCurrentUser());
+            wikiPage.setCreateTime(now);
+            wikiPageDao.saveWikiPage(wikiPage);
+        }
 
     }
 
     public WikiPageDao getWikiPageDao() {
-	return wikiPageDao;
+        return wikiPageDao;
     }
 
     public void setWikiPageDao(WikiPageDao wikiPageDao) {
-	this.wikiPageDao = wikiPageDao;
+        this.wikiPageDao = wikiPageDao;
     }
 
     @Override
     public WikiPage findWikiPage(Long id) {
-	return wikiPageDao.findWikiPage(id);
+        return wikiPageDao.findWikiPage(id);
     }
 
     @Override
     public List<WikiPage> listRootWikiPages() {
-	return wikiPageDao.listRootWikiPages();
+        return wikiPageDao.listRootWikiPages();
     }
 
     @Override
     public List<WikiPage> listWikiPages(Long parentId) {
-	return wikiPageDao.listWikiPages(parentId);
+        return wikiPageDao.listWikiPages(parentId);
     }
 }

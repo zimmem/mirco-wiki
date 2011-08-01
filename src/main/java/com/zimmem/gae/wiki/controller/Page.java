@@ -16,17 +16,17 @@ import com.zimmem.gae.wiki.service.WikiPageService;
 public class Page {
 
     @Autowired
-    private WikiPageDao wikiPageDao;
+    private WikiPageDao     wikiPageDao;
 
     @Autowired
     private WikiPageService wikiPageService;
 
     @RequestMapping("/page")
     public void show(Map<String, Object> model, @RequestParam("id") long id) {
-	WikiPage wikiPage = wikiPageDao.findWikiPage(id);
-	model.put("wikiPage", wikiPage);
-	List<WikiPage> children = wikiPageService.listWikiPages(id);
-	model.put("children", children);
+        WikiPage wikiPage = wikiPageDao.findWikiPage(id);
+        model.put("wikiPage", wikiPage);
+        List<WikiPage> children = wikiPageService.listWikiPages(id);
+        model.put("children", children);
     }
 
 }
