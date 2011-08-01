@@ -304,7 +304,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<configuration>
                     <!--<goals>gae:deploy</goals>-->
-                    <goals>install</goals>
+                    <goals>test</goals>
 				</configuration>
 			</plugin>
 
