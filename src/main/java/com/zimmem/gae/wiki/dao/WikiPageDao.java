@@ -8,7 +8,7 @@ public interface WikiPageDao {
 
     WikiPage findWikiPage(Long id);
 
-    void saveWikiPage(WikiPage wikipage);
+    void insertWikiPage(WikiPage wikipage);
 
     void editWikiPage(WikiPage wikipage);
 

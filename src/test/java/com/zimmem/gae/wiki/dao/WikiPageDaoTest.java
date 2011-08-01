@@ -43,7 +43,7 @@ public class WikiPageDaoTest {
 	WikiPage page = new WikiPage();
 	page.setWiki("123");
 	page.setHtml("123");
-	wikiPageDao.saveWikiPage(page);
+	wikiPageDao.insertWikiPage(page);
 	WikiPage page2 = wikiPageDao.findWikiPage(page.getId());
 	Assert.assertEquals(page.getWiki(), page2.getWiki());
 	System.out.println(page.getWiki());

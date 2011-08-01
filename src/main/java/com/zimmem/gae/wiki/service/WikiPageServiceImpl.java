@@ -1,6 +1,5 @@
 package com.zimmem.gae.wiki.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.google.appengine.api.users.UserService;
@@ -16,28 +15,33 @@ public class WikiPageServiceImpl implements WikiPageService {
 
     @Override
     public void saveWikiPage(WikiPage wikiPage) {
-        Date now = new Date();
 
-        if (wikiPage.getId() != null && wikiPage.getId() >= 0) {
+        if (wikiPage.getId() == null || wikiPage.getId() < 0) {
+            addWikiPage(wikiPage);
+        } else {
             WikiPage old = findWikiPage(wikiPage.getId());
             if (old != null) {
-                old.setEditor(userService.getCurrentUser());
-                old.setModifiedTime(now);
-                old.setTitle(wikiPage.getTitle());
-                old.setWiki(wikiPage.getWiki());
-                old.setHtml(wikiPage.getHtml());
-                wikiPageDao.editWikiPage(old);
+                modifiedWikiPage(old, wikiPage);
             } else {
-                wikiPage.setCreater(userService.getCurrentUser());
-                wikiPage.setCreateTime(now);
-                wikiPageDao.saveWikiPage(wikiPage);
+                addWikiPage(wikiPage);
             }
-        } else {
-
-            wikiPage.setCreater(userService.getCurrentUser());
-            wikiPage.setCreateTime(now);
-            wikiPageDao.saveWikiPage(wikiPage);
         }
+
+    }
+
+    private void modifiedWikiPage(WikiPage old, WikiPage theNew) {
+
+        old.setEditor(userService.getCurrentUser());
+        old.setTitle(theNew.getTitle());
+        old.setWiki(theNew.getWiki());
+        old.setHtml(theNew.getHtml());
+        wikiPageDao.editWikiPage(old);
+    }
+
+    private void addWikiPage(WikiPage wikiPage) {
+        wikiPage.setCreater(userService.getCurrentUser());
+        wikiPage.setEditor(userService.getCurrentUser());
+        wikiPageDao.insertWikiPage(wikiPage);
 
     }
 
