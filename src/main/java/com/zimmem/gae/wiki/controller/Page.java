@@ -22,11 +22,18 @@ public class Page {
     private WikiPageService wikiPageService;
 
     @RequestMapping("/page")
-    public void show(Map<String, Object> model, @RequestParam("id") long id) {
+    public void main(Map<String, Object> model, @RequestParam("id") long id) {
         WikiPage wikiPage = wikiPageDao.findWikiPage(id);
         model.put("wikiPage", wikiPage);
         List<WikiPage> children = wikiPageService.listWikiPages(id);
         model.put("children", children);
+    }
+
+    @RequestMapping("/page/history")
+    public String history(Map<String, Object> model, @RequestParam("id") long id) {
+        WikiPage wikiPage = wikiPageDao.findWikiPage(id);
+        model.put("wikiPage", wikiPage);
+        return "history";
     }
 
 }

@@ -15,5 +15,6 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" />
 
 	<bean id="wikiPageDao" class="com.zimmem.gae.wiki.dao.WikiPageDaoImpl" />
+	<bean id="wikiRevisionDao" class="com.zimmem.gae.wiki.dao.WikiRevisionDaoImpl" />
 
 </beans>

@@ -1,12 +1,18 @@
 package com.zimmem.gae.wiki.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.users.User;
@@ -16,27 +22,30 @@ public class WikiPage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long   id;
+    private Long               id;
 
-    private String title;
+    private String             title;
     @Basic
-    private User   creater;
+    private User               creater;
     @Basic
-    private User   editor;
+    private User               editor;
 
-    private Date   createTime;
+    private Date               createTime;
 
-    private Date   modifiedTime;
+    private Date               modifiedTime;
 
-    private Long   parentId;
+    private Long               parentId;
 
-    private Long   revision;
-
-    @Basic
-    private Text   wikiText;
+    private int                version;
 
     @Basic
-    private Text   htmlText;
+    private Text               wikiText;
+
+    @Basic
+    private Text               htmlText;
+
+    @OneToMany(mappedBy = "wikiPage", cascade = CascadeType.ALL)
+    private List<WikiRevision> revisions;
 
     public Long getId() {
         return id;
@@ -94,14 +103,6 @@ public class WikiPage {
         this.parentId = parentId;
     }
 
-    public Long getRevision() {
-        return revision;
-    }
-
-    public void setRevision(Long revision) {
-        this.revision = revision;
-    }
-
     public Text getWikiText() {
         return wikiText;
     }
@@ -133,4 +134,34 @@ public class WikiPage {
     public void setHtml(String html) {
         htmlText = html == null ? null : new Text(html);
     }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
+    public List<WikiRevision> getRevisions() {
+        return revisions;
+    }
+
+    public void setRevisions(List<WikiRevision> revisions) {
+        this.revisions = revisions;
+    }
+    
+    public void addRevision(WikiRevision revision){
+        if(revisions == null ){
+            revisions = new ArrayList<WikiRevision>();
+        }
+        revisions.add(revision);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
+    
+    
 }

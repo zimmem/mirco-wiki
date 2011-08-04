@@ -1,17 +1,22 @@
 package com.zimmem.gae.wiki.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.zimmem.gae.wiki.dao.WikiPageDao;
+import com.zimmem.gae.wiki.dao.WikiRevisionDao;
 import com.zimmem.gae.wiki.model.WikiPage;
+import com.zimmem.gae.wiki.model.WikiRevision;
 
 public class WikiPageServiceImpl implements WikiPageService {
 
-    private WikiPageDao wikiPageDao;
+    private WikiPageDao     wikiPageDao;
 
-    private UserService userService = UserServiceFactory.getUserService();
+    private WikiRevisionDao wikiRevisionDao;
+
+    private UserService     userService = UserServiceFactory.getUserService();
 
     @Override
     public void saveWikiPage(WikiPage wikiPage) {
@@ -31,16 +36,34 @@ public class WikiPageServiceImpl implements WikiPageService {
 
     private void modifiedWikiPage(WikiPage old, WikiPage theNew) {
 
+        WikiRevision revision = new WikiRevision();
+        revision.setTitle(old.getTitle());
+        revision.setAuthor(old.getEditor());
+        revision.setHtml(old.getHtml());
+        revision.setModifiedTime(old.getModifiedTime());
+        revision.setPageId(old.getId());
+        revision.setVersion(old.getVersion());
+        revision.setWiki(old.getWiki());
+
         old.setEditor(userService.getCurrentUser());
         old.setTitle(theNew.getTitle());
         old.setWiki(theNew.getWiki());
         old.setHtml(theNew.getHtml());
+        old.setVersion(old.getVersion() + 1);
+        old.setModifiedTime(new Date());
+        old.addRevision(revision);
         wikiPageDao.editWikiPage(old);
+        // wikiRevisionDao.insertWikiRevision(revision);
+
     }
 
     private void addWikiPage(WikiPage wikiPage) {
+        Date now = new Date();
         wikiPage.setCreater(userService.getCurrentUser());
         wikiPage.setEditor(userService.getCurrentUser());
+        wikiPage.setCreateTime(now);
+        wikiPage.setModifiedTime(now);
+        wikiPage.setVersion(1);
         wikiPageDao.insertWikiPage(wikiPage);
 
     }
@@ -66,5 +89,18 @@ public class WikiPageServiceImpl implements WikiPageService {
     @Override
     public List<WikiPage> listWikiPages(Long parentId) {
         return wikiPageDao.listWikiPages(parentId);
+    }
+
+    public WikiRevisionDao getWikiRevisionDao() {
+        return wikiRevisionDao;
+    }
+
+    public void setWikiRevisionDao(WikiRevisionDao wikiRevisionDao) {
+        this.wikiRevisionDao = wikiRevisionDao;
+    }
+
+    @Override
+    public WikiRevision findWikiRevision(Long pageId, int version) {
+        return wikiPageDao.findWikiRevision(pageId, version);
     }
 }

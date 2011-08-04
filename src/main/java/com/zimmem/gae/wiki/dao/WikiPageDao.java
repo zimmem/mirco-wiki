@@ -3,6 +3,7 @@ package com.zimmem.gae.wiki.dao;
 import java.util.List;
 
 import com.zimmem.gae.wiki.model.WikiPage;
+import com.zimmem.gae.wiki.model.WikiRevision;
 
 public interface WikiPageDao {
 
@@ -15,4 +16,6 @@ public interface WikiPageDao {
     List<WikiPage> listWikiPages(Long parentId);
 
     List<WikiPage> listRootWikiPages();
+
+    WikiRevision findWikiRevision(Long pageId, int version);
 }

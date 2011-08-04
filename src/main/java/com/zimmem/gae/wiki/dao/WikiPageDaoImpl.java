@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 import com.zimmem.gae.wiki.model.WikiPage;
+import com.zimmem.gae.wiki.model.WikiRevision;
 
 public class WikiPageDaoImpl extends JpaDaoSupport implements WikiPageDao {
 
@@ -40,5 +41,10 @@ public class WikiPageDaoImpl extends JpaDaoSupport implements WikiPageDao {
     @Override
     public List<WikiPage> listRootWikiPages() {
         return getJpaTemplate().find("select w from WikiPage w where w.parentId = 0  or w.parentId is NULL");
+    }
+
+    public WikiRevision findWikiRevision(Long pageId, int version) {
+        return (WikiRevision) getJpaTemplate().find("select r from WikiRevision r where r.pageId = :1 and r.version = :2",
+                                                    pageId, version).get(0);
     }
 }

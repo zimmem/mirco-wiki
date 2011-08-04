@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.users.User;
 
@@ -16,24 +19,20 @@ public class WikiRevision {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long pageId;
-    private int  version;
+    private Key      key;
+    private Long     pageId;
+    private int      version;
+    private String   title;
     @Basic
-    private Text wikiText;
+    private Text     wikiText;
     @Basic
-    private Text htmlText;
+    private Text     htmlText;
     @Basic
-    private User author;
-    private Date modifiedTime;
+    private User     author;
+    private Date     modifiedTime;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Basic
+    private WikiPage wikiPage;
 
     public Long getPageId() {
         return pageId;
@@ -97,6 +96,35 @@ public class WikiRevision {
 
     public void setHtml(String html) {
         this.htmlText = html == null ? null : new Text(html);
+    }
+
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        this.key = key;
+    }
+
+    public WikiPage getWikiPage() {
+        return wikiPage;
+    }
+
+    public void setWikiPage(WikiPage wikiPage) {
+        this.wikiPage = wikiPage;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
 }
