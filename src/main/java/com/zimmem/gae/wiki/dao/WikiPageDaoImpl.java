@@ -44,7 +44,8 @@ public class WikiPageDaoImpl extends JpaDaoSupport implements WikiPageDao {
     }
 
     public WikiRevision findWikiRevision(Long pageId, int version) {
-        return (WikiRevision) getJpaTemplate().find("select r from WikiRevision r where r.pageId = :1 and r.version = :2",
-                                                    pageId, version).get(0);
+        List<WikiRevision> list = getJpaTemplate().find("select r from WikiRevision r where r.pageId = :1 and r.version = :2",
+                                                        pageId, version);
+        return list.isEmpty() ? null : list.get(0);
     }
 }
