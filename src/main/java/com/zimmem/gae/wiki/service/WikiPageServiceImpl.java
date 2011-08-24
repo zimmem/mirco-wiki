@@ -37,7 +37,6 @@ public class WikiPageServiceImpl implements WikiPageService {
     private void modifiedWikiPage(WikiPage old, WikiPage theNew) {
 
         WikiRevision revision = new WikiRevision();
-        revision.setTitle(old.getTitle());
         revision.setAuthor(old.getEditor());
         revision.setHtml(old.getHtml());
         revision.setModifiedTime(old.getModifiedTime());

@@ -42,10 +42,12 @@ public class Page {
         if (versions == null || versions.length < 2) {
             model.put("error", true);
         }
+        WikiPage wikiPage = wikiPageDao.findWikiPage(id);
         WikiRevision revisionA = wikiPageService.findWikiRevision(id, versions[0]);
         WikiRevision revisionB = wikiPageService.findWikiRevision(id, versions[1]);
         model.put("preRevision", versions[0] < versions[1] ? revisionA : revisionB);
         model.put("afterRevision", versions[0] < versions[1] ? revisionB : revisionA);
+        model.put("wikiPage", wikiPage);
         return "diff";
     }
 

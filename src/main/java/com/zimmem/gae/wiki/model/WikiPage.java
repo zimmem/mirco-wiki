@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -45,6 +46,7 @@ public class WikiPage {
     private Text               htmlText;
 
     @OneToMany(mappedBy = "wikiPage", cascade = CascadeType.ALL)
+    @OrderBy("version desc")
     private List<WikiRevision> revisions;
 
     public Long getId() {

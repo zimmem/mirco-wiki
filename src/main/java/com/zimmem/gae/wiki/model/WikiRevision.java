@@ -22,7 +22,6 @@ public class WikiRevision {
     private Key      key;
     private Long     pageId;
     private int      version;
-    private String   title;
     @Basic
     private Text     wikiText;
     @Basic
@@ -112,14 +111,6 @@ public class WikiRevision {
 
     public void setWikiPage(WikiPage wikiPage) {
         this.wikiPage = wikiPage;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
     
     @Override
