@@ -20,5 +20,8 @@ public interface WikiPageService {
 
     List<WikiPage> listWikiPages(Long parentId);
 
-    public WikiRevision findWikiRevision(Long pageId, int version);
+    WikiRevision findWikiRevision(Long pageId, int version);
+
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    void fixData();
 }

@@ -18,4 +18,6 @@ public interface WikiPageDao {
     List<WikiPage> listRootWikiPages();
 
     WikiRevision findWikiRevision(Long pageId, int version);
+
+    void mergeWikiPage(WikiPage wikipage);
 }

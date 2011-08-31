@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /page
+Disallow: /create_page
+Disallow: /edit_page

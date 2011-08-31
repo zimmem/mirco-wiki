@@ -37,7 +37,7 @@ public class WikiPage {
 
     private Long               parentId;
 
-    private int                version;
+    private Integer                version;
 
     @Basic
     private Text               wikiText;
@@ -137,11 +137,11 @@ public class WikiPage {
         htmlText = html == null ? null : new Text(html);
     }
 
-    public int getVersion() {
+    public Integer getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(Integer version) {
         this.version = version;
     }
 

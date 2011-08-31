@@ -48,4 +48,13 @@ public class WikiPageDaoImpl extends JpaDaoSupport implements WikiPageDao {
                                                         pageId, version);
         return list.isEmpty() ? null : list.get(0);
     }
+    
+    
+    @Override
+    public void mergeWikiPage(WikiPage wikipage) {
+        Date now = new Date();
+        wikipage.setModifiedTime(now);
+        getJpaTemplate().merge(wikipage);
+
+    }
 }

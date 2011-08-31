@@ -41,14 +41,14 @@ public class WikiPageServiceImpl implements WikiPageService {
         revision.setHtml(old.getHtml());
         revision.setModifiedTime(old.getModifiedTime());
         revision.setPageId(old.getId());
-        revision.setVersion(old.getVersion());
+        revision.setVersion(old.getVersion() == null ? 1:old.getVersion()  );
         revision.setWiki(old.getWiki());
 
         old.setEditor(userService.getCurrentUser());
         old.setTitle(theNew.getTitle());
         old.setWiki(theNew.getWiki());
         old.setHtml(theNew.getHtml());
-        old.setVersion(old.getVersion() + 1);
+        old.setVersion(old.getVersion() == null ? 2:old.getVersion() + 1);
         old.setModifiedTime(new Date());
         old.addRevision(revision);
         wikiPageDao.editWikiPage(old);
@@ -101,5 +101,14 @@ public class WikiPageServiceImpl implements WikiPageService {
     @Override
     public WikiRevision findWikiRevision(Long pageId, int version) {
         return wikiPageDao.findWikiRevision(pageId, version);
+    }
+
+    @Override
+    public void fixData() {
+        List<WikiPage> list = listRootWikiPages();
+        for (WikiPage wikiPage : list) {
+            wikiPage.setVersion(1);
+            wikiPageDao.mergeWikiPage(wikiPage);
+        }
     }
 }
