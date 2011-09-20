@@ -1,3 +1,7 @@
+body{
+	background: #FFF;
+}
+
 /*edit-form*/
 #edit-tab,#preview-tab {
 	padding: 5px;

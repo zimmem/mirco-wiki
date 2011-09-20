@@ -1,0 +1,17 @@
+<div id="children-section" class="pageSection">
+
+	<div class="section-header ">
+		<h2 id="children-section-title" class="section-title">
+			<a name="children">Children ($children.size())</a>
+		</h2>
+		<span class="noprint"> &nbsp; <a id="hide-children-link" class="grey" href="javascript:void(0)">Hide Children</a> &nbsp; 
+		|&nbsp; <a class="grey" href="/create_page?parentId=$!{wikiPage.id}">Add Child Page</a> </span>
+	</div>
+	<div id="page-children" class="pageSectionBody">
+		#foreach($page in $children)
+		<ul>
+		   <a href="/page?id=${page.id}">$esc.html(${page.title})</a>
+		</ul>
+		#end
+	</div>
+</div>

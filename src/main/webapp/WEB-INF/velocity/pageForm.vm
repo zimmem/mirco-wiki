@@ -1,0 +1,34 @@
+<div style="width: 960px;">
+	<form method="POST" action="/post_page">
+		<input type="hidden" name="id" value="$!wikiPage.id" />
+		<input type="hidden" name="parentId" value="$!wikiPage.parentId" />
+		<input name="title" value="$!esc.html($!wikiPage.title)" style="width: 100%; font-size: 25px;" />
+		</p>
+		<a href="javascript:void(0)" id="preview-tab">preview</a>
+		<a href="javascript:void(0)" id="edit-tab">Wiki Markup</a>
+		<div id="wiki-edit" style=" border: 1px #999 solid;">
+			<textarea name="wiki" id="wiki-text" rows="20" style="width: 100%;">$!esc.html($!wikiPage.wiki)</textarea>
+		</div>
+		<div id="wiki-content-preview" style="display: none; border: 1px #999 solid;">
+			<div id="wiki-content" class="wiki-content"></div>
+		</div>
+		<button>Save</button>
+	</form>
+
+</div>
+<script>
+	//$('#wiki-tab').tabs();
+	$('#preview-tab').click(function() {
+		jQuery.post('/api-wiki/render', {
+			'wiki' : $('#wiki-text').val()
+		}, function(data) {
+			$('#wiki-content').html(data);
+			$('#wiki-edit').hide();
+			$('#wiki-content-preview').show();
+		});
+	});
+	$('#edit-tab').click(function() {
+		$('#wiki-content-preview').hide();
+		$('#wiki-edit').show();
+	});
+</script>

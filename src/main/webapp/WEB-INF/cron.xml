@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+	<cron>
+		<url>/keep_alive.html</url>
+		<description>ping server every 1 minutes</description>
+		<schedule>every 1 minutes</schedule>
+	</cron>
+
+</cronentries>

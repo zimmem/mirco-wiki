@@ -1,0 +1,5 @@
+<h1>$!esc.html($!wikiPage.title)</h1>
+<div class="grey">edit by $!{wikiPage.editor.nickname} $!revision.modifiedTime</div>
+<pre>
+	$!esc.html($!revision.wiki)
+</pre>

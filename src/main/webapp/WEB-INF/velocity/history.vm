@@ -1,0 +1,17 @@
+<h1>$!{wikiPage.title}</h1>
+#set($revisions = $wikiPage.revisions)
+#if($revisions.empty)
+#else
+<ul>
+<form action="/page/history/diff">
+<input type="hidden" value="$wikiPage.id" name="id"/>
+#foreach($revision in $revisions)
+	<li><input type="checkbox" name="versions" value="$revision.version"/><a href="/show_revision?pageId=$revision.pageId&version=$revision.version">version $!esc.html($revision.version)</a>
+		<span class="grey">($!{revision.author.nickname} $!{revision.modifiedTime})</span>
+	</li>
+	
+#end
+<button>Compare</button>
+</form>
+</ul>
+#end

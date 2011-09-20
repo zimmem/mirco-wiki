@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="com.zimmem.gae.wiki.controller" />
+	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="defaultHandler">
+			<bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
+		</property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<!-- <property name="webBindingInitializer"> <bean class="com.zimmem.zhome.spring.mvc.DefaultWebBindingInitializer" /> </property> -->
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.UTF8StringHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.FormHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+
+	<bean name="id" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/velocity/" />
+		<property name="velocityProperties">
+			<props>
+				<prop key="directive.foreach.counter.name">loopCounter</prop>
+				<prop key="directive.foreach.counter.initial.value">0</prop>
+				<prop key="input.encoding">utf-8</prop>
+				<prop key="output.encoding">utf-8</prop>
+				<prop key="eventhandler.referenceinsertion.class">com.zimmem.velocity.reference.DateReference</prop>
+				<!-- <prop key="eventhandler.referenceinsertion.class">com.zimmem.velocity.reference.AutoEascepeReference</prop> -->
+				<!--<prop key="velocimacro.library">macro/macro.vm</prop> -->
+			</props>
+		</property>
+	</bean>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+		<property name="suffix" value=".vm" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="layoutUrl" value="/layout/default.vm" />
+		<property name="dateToolAttribute" value="dateTool" />
+		<property name="contentType">
+			<value>text/html;charset=UTF-8</value>
+		</property>
+		<property name="toolboxConfigLocation" value="WEB-INF/velocity-toolbox.xml" />
+		<property name="attributesMap">
+			<map>
+				<entry key="gaeUser">
+					<bean class="com.zimmem.gae.wiki.viewtools.GaeUserTools" />
+				</entry>
+				<entry key="metadata" value-ref="metadata" />
+			</map>
+		</property>
+
+	</bean>
+
+	<bean id="metadata" class="com.zimmem.gae.wiki.config.Metadata" />
+
+
+	<!-- <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer"> <property name="customEditors"> <map> <entry key="com.google.appengine.api.datastore.Text" value="com.zimmem.zhome.util.google.TextPropertyEditer" /> </map> </property> </bean> -->
+</beans>

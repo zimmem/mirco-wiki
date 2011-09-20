@@ -1,0 +1,31 @@
+<div id="header">
+<ul id="header-menu-bar" class="ajs-menu-bar">
+		#if($wikiPage)
+		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="/create_page?parentId=$!{wikiPage.id}">New Page</a></li> 
+		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="/edit_page?id=$!{wikiPage.id}">Edit</a></li> 
+		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="/page/history?id=$!{wikiPage.id}">History</a></li>
+		#else
+		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="/create_page">New Page</a></li> 
+		#end 
+		#if($gaeUser.login)
+		<li class="normal ajs-menu-item"><a id="user-menu-link" class="user trigger ajs-menu-title" href="#"><span>$!{gaeUser.nickname}</span> </a></li>
+		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="$!{gaeUser.logoutUrl}">Logout</a></li> 
+		#else
+		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="$!{gaeUser.loginUrl}">Login</a></li> 
+		#end
+	</ul>
+	<ol id="breadcrumbs">
+		<li><span> <a href="/">Home</a> </span></li>
+		#if($wikiPage) 
+		<li><span>&gt; <a href="/page?id=$!{wikiPage.id}">$!{wikiPage.title}</a> </span></li>
+		#end
+	</ol>
+	
+
+
+</div>
+
+
+
+
+</div>

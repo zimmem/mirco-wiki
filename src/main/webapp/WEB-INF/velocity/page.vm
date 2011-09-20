@@ -1,0 +1,16 @@
+#set($title=$esc.html($!{wikiPage.title}))
+<h1 id="title-heading" class="pagetitle">
+    <span id="title-text"><a href="/page?id=$!{wikiPage.id}">$esc.html($!{wikiPage.title})</a>
+    </span>
+ </h1>
+ <div class="grey">Added By $!{wikiPage.creater.nickname}, last edited by $!{wikiPage.editor.nickname} on $!{wikiPage.modifiedTime}</div>
+<div class="wiki-content">
+	$!{wikiPage.html}
+</div>
+
+#if($children && $children.size()>0)
+#parse("widget/childrenSection.vm")
+#end
+<script>
+mirco_wiki.prettyCode();
+</script>

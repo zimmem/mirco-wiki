@@ -1,0 +1,12 @@
+<script src="/static/js/jsdiff.js"></script>
+<style>
+.diff{border: dashed 1px #3C78B5;padding: 10px;margin: 15px;}
+.diff ins,del{text-decoration:none;}
+.diff ins{background:#cfc;}
+.diff del{background:#fcc;}
+</style>
+<h1>$!{wikiPage.title}</h1>
+<div id="diff" class="diff"></div>
+<script>
+	$('#diff').html( diffString('$!esc.javascript($preRevision.wiki)','$!esc.javascript($afterRevision.wiki)').replace(/\r\n/gm,'<br />').replace(/\r/gm,'<br />'));
+</script>
