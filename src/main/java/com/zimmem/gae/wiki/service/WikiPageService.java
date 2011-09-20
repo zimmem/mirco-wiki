@@ -22,6 +22,4 @@ public interface WikiPageService {
 
     WikiRevision findWikiRevision(Long pageId, int version);
 
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    void fixData();
 }

@@ -103,12 +103,4 @@ public class WikiPageServiceImpl implements WikiPageService {
         return wikiPageDao.findWikiRevision(pageId, version);
     }
 
-    @Override
-    public void fixData() {
-        List<WikiPage> list = listRootWikiPages();
-        for (WikiPage wikiPage : list) {
-            wikiPage.setVersion(1);
-            wikiPageDao.mergeWikiPage(wikiPage);
-        }
-    }
 }

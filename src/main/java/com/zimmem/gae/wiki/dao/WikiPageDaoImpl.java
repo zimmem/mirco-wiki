@@ -40,7 +40,7 @@ public class WikiPageDaoImpl extends JpaDaoSupport implements WikiPageDao {
 
     @Override
     public List<WikiPage> listRootWikiPages() {
-        return getJpaTemplate().find("select w from WikiPage w where w.parentId = 0  or w.parentId is NULL");
+        return getJpaTemplate().find("select w from WikiPage w where w.parentId = 0  or w.parentId is NULL order by w.modifiedTime desc");
     }
 
     public WikiRevision findWikiRevision(Long pageId, int version) {
