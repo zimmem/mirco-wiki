@@ -7,13 +7,13 @@ import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
 
 public class DateReference implements ReferenceInsertionEventHandler {
 
-    private static FastDateFormat dateFormat = FastDateFormat.getInstance("yyyy-MM-dd");
+    private static final FastDateFormat dateFormat = FastDateFormat.getInstance(System.getProperty("velocity.dateformat.default"));
 
     @Override
     public Object referenceInsert(String reference, Object value) {
-        
+
         if (value == null) return null;
-        
+
         if (value instanceof Date) {
             return dateFormat.format(value);
         }

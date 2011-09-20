@@ -8,7 +8,9 @@
 }
 
 pre{
-	border: dashed 1px #3C78B5;padding: 10px;margin: 15px;
+	border: dashed 1px #3C78B5;
+	padding: 10px;
+	margin: 15px;
 }
 
 pre.prettyprint{
@@ -16,6 +18,7 @@ pre.prettyprint{
 	margin-right: 20px;
 	padding-bottom: 20px;
 	padding-left: 10px;
-    background-color: #EEE;
+    background-color: #F9F9F9;
+    border: dashed 1px #3C78B5;
 }
 
