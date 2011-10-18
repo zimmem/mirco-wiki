@@ -1,5 +1,9 @@
-body{
+body {
 	background: #FFF;
+}
+
+#copyright {
+	text-align: center;
 }
 
 /*edit-form*/
@@ -11,18 +15,17 @@ body{
 	float: right;
 }
 
-pre{
+pre {
 	border: dashed 1px #3C78B5;
 	padding: 10px;
 	margin: 15px;
 }
 
-pre.prettyprint{
+pre.prettyprint {
 	margin-left: 40px;
 	margin-right: 20px;
 	padding-bottom: 20px;
 	padding-left: 10px;
-    background-color: #F9F9F9;
-    border: dashed 1px #3C78B5;
+	background-color: #F9F9F9;
+	border: dashed 1px #3C78B5;
 }
-
