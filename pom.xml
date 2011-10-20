@@ -301,7 +301,7 @@
 			<plugin>
 				<groupId>net.kindleit</groupId>
 				<artifactId>maven-gae-plugin</artifactId>
-				<version>0.9.1</version>
+				<version>0.9.2</version>
 				<dependencies>
 					<dependency>
 						<groupId>net.kindleit</groupId>
@@ -341,7 +341,7 @@
 
 		<!-- Specify AppEngine version for your project. It should match SDK version pointed to by ${gae.home} property (Typically, one used by your Eclipse plug-in) -->
 		<spring.version>3.0.0.RELEASE</spring.version>
-		<gae.version>1.5.4</gae.version>
+		<gae.version>1.5.5</gae.version>
 		<!-- Upload to http://test.latest.<applicationName>.appspot.com by default -->
 		<gae.application.version>test</gae.application.version>
 
