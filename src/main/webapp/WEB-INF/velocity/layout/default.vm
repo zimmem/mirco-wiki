@@ -17,6 +17,6 @@
 <body>
 	#parse("widget/head_bar.vm")
 	<div id="main">$screen_content</div>
-	<div id="copyright">&copy; 2011 Zimmem.com, Power by Google Appengine</div>
+	<div id="copyright">&copy; 2011 Zimmem.com, Power by Google App Engine</div>
 </body>
 </html>

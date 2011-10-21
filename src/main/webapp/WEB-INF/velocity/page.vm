@@ -2,6 +2,8 @@
 <h1 id="title-heading" class="pagetitle">
     <span id="title-text"><a href="/page?id=$!{wikiPage.id}">$esc.html($!{wikiPage.title})</a>
     </span>
+    <!-- Place this tag where you want the +1 button to render -->
+<div class="g-plusone" data-size="medium" data-annotation="inline"></div>
  </h1>
  <div class="grey">Added By $!{wikiPage.creater.nickname}, last edited by $!{wikiPage.editor.nickname} on $!{wikiPage.modifiedTime}</div>
 <div class="wiki-content">
@@ -13,4 +15,9 @@
 #end
 <script>
 mirco_wiki.prettyCode();
+</script>
+
+<!-- Place this tag in your head or just before your close body tag -->
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'zh-CN'}
 </script>
