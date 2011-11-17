@@ -332,6 +332,30 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/webapp/WEB-INF</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/webapp/WEB-INF</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.xml</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+
+		<filters>
+			<filter>${mirco.wiki.filter}</filter>
+		</filters>
 	</build>
 
 	<!-- Specify hard-coded project properties here -->
