@@ -2,7 +2,7 @@
 <head>
 <title>#if($title)$title - #end $!{metadata.title}</title>
 #foreach($data in $metas.all)
-<meta name="$!{data.name}" content="$!{data.content}"/>
+<meta name="$!{data.name}" content="$!esc.html(${data.content})"/>
 #end
 <link type="text/css" rel="stylesheet" href="/static/css/default-theme.css" />
 <link type="text/css" rel="stylesheet" href="/static/css/master.css" />
