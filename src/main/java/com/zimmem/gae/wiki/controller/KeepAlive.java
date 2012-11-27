@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class KeepAlive {
 
     @RequestMapping("/keep_alive")
-    public void keep(Writer writer) {
+    public void keep(Writer writer) throws InterruptedException {
         try {
+            Thread.sleep(600000);
             writer.write(String.valueOf(System.currentTimeMillis()));
         } catch (IOException e) {
         }

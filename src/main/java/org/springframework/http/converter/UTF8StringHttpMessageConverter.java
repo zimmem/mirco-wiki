@@ -44,12 +44,12 @@ public class UTF8StringHttpMessageConverter extends AbstractHttpMessageConverter
     }
 
     @Override
-    public boolean supports(Class<? extends String> clazz) {
+    public boolean supports(Class<?> clazz) {
         return String.class.equals(clazz);
     }
 
     @Override
-    public String readInternal(Class<String> clazz, HttpInputMessage inputMessage) throws IOException {
+    public String readInternal(Class clazz, HttpInputMessage inputMessage) throws IOException {
         MediaType contentType = inputMessage.getHeaders().getContentType();
         Charset charset = contentType.getCharSet() != null ? contentType.getCharSet() : DEFAULT_CHARSET;
         return FileCopyUtils.copyToString(new InputStreamReader(inputMessage.getBody(), charset));
@@ -88,5 +88,6 @@ public class UTF8StringHttpMessageConverter extends AbstractHttpMessageConverter
     protected List<Charset> getAcceptedCharsets() {
         return this.availableCharsets;
     }
+
 
 }

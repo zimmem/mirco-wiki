@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.petebevin.markdown.MarkdownProcessor;
 import com.zimmem.gae.wiki.model.WikiPage;
 import com.zimmem.gae.wiki.service.WikiPageService;
-import com.zimmem.wiki.parse.ParseException;
-import com.zimmem.wiki.parse.WikiEngine;
 
 @Controller
 public class PageManager {
@@ -22,11 +21,10 @@ public class PageManager {
     private WikiPageService wikpagePageService;
 
     @RequestMapping(value = "/post_page", method = RequestMethod.POST)
-    public String postPage(WikiPage wikiPage) throws ParseException, IOException {
-        WikiEngine engine = new WikiEngine();
+    public String postPage(WikiPage wikiPage) throws  IOException {
+        MarkdownProcessor process = new MarkdownProcessor();
         StringWriter writer = new StringWriter();
-        engine.render(wikiPage.getWiki(), writer);
-        wikiPage.setHtml(writer.toString());
+        wikiPage.setHtml(process.markdown(wikiPage.getWiki()));
         wikpagePageService.saveWikiPage(wikiPage);
         return "redirect:/page?id=" + wikiPage.getId();
     }

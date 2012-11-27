@@ -17,5 +17,5 @@
 		<include path="/robots.txt" />
 		<include path="/*.html" />
 	</static-files>
-
+	<threadsafe>true</threadsafe>
 </appengine-web-app>

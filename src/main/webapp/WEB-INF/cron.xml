@@ -2,8 +2,8 @@
 <cronentries>
 	<cron>
 		<url>/keep_alive.html</url>
-		<description>ping server every 1 minutes</description>
-		<schedule>every 1 minutes</schedule>
+		<description>ping server every 10 minutes</description>
+		<schedule>every 10 minutes</schedule>
 	</cron>
 
 </cronentries>
