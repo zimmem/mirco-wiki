@@ -1,34 +1,27 @@
-<div style="width: 960px;">
+<div style="margin: 50px;">
 	<form method="POST" action="/post_page">
 		<input type="hidden" name="id" value="$!wikiPage.id" />
 		<input type="hidden" name="parentId" value="$!wikiPage.parentId" />
+        <input type="hidden" id="wiki-val" name="wiki" />
 		<input name="title" value="$!esc.html($!wikiPage.title)" style="width: 100%; font-size: 25px;" />
 		</p>
-		<a href="javascript:void(0)" id="preview-tab">preview</a>
-		<a href="javascript:void(0)" id="edit-tab">Wiki Markup</a>
-		<div id="wiki-edit" style=" border: 1px #999 solid;">
-			<textarea name="wiki" id="wiki-text" rows="20" style="width: 100%;">$!esc.html($!wikiPage.wiki)</textarea>
+		
+		<div id="wiki-edit" style=" border: 1px #999 solid; " class="ace_editor_wrapper ">
+			<div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
 		</div>
+        
 		<div id="wiki-content-preview" style="display: none; border: 1px #999 solid;">
 			<div id="wiki-content" class="wiki-content"></div>
 		</div>
-		<button>Save</button>
+		<button id="submit-btn">Save</button>
 	</form>
-
 </div>
+<script type="text/javascript" src="/static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
-	//$('#wiki-tab').tabs();
-	$('#preview-tab').click(function() {
-		jQuery.post('/api-wiki/render', {
-			'wiki' : $('#wiki-text').val()
-		}, function(data) {
-			$('#wiki-content').html(data);
-			$('#wiki-edit').hide();
-			$('#wiki-content-preview').show();
-		});
-	});
-	$('#edit-tab').click(function() {
-		$('#wiki-content-preview').hide();
-		$('#wiki-edit').show();
-	});
+    var editor = ace.edit("markdown-editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/markdown");
+    $('#submit-btn').click(function(){
+        $('#wiki-val').val(editor.getValue());
+    });
 </script>

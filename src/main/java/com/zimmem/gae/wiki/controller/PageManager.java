@@ -1,7 +1,6 @@
 package com.zimmem.gae.wiki.controller;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ public class PageManager {
     @RequestMapping(value = "/post_page", method = RequestMethod.POST)
     public String postPage(WikiPage wikiPage) throws  IOException {
         MarkdownProcessor process = new MarkdownProcessor();
-        StringWriter writer = new StringWriter();
         wikiPage.setHtml(process.markdown(wikiPage.getWiki()));
         wikpagePageService.saveWikiPage(wikiPage);
         return "redirect:/page?id=" + wikiPage.getId();

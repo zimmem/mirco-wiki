@@ -7,14 +7,7 @@ body {
 	margin: 20px;
 }
 
-/*edit-form*/
-#edit-tab,#preview-tab {
-	padding: 5px;
-	border: 1px #999 solid;
-	margin: 0px;
-	display: block;
-	float: right;
-}
+
 
 pre {
 	border: dashed 1px #3C78B5;
@@ -30,3 +23,21 @@ pre.prettyprint {
 	background-color: #F9F9F9;
 	border: dashed 1px #3C78B5;
 }
+
+
+.ace_editor_wrapper {
+    
+    position: relative;
+    border: 1px solid #DDD;
+    margin: 5px;
+    height: 500px;
+}
+
+#markdown-editor { 
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        margin: 0px;
+        height: 500px;
+    }
