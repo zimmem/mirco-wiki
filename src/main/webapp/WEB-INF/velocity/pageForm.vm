@@ -3,17 +3,11 @@
 		<input type="hidden" name="id" value="$!wikiPage.id" />
 		<input type="hidden" name="parentId" value="$!wikiPage.parentId" />
         <input type="hidden" id="wiki-val" name="wiki" />
-		<input name="title" value="$!esc.html($!wikiPage.title)" style="width: 100%; font-size: 25px;" />
-		</p>
-		
-		<div id="wiki-edit" style=" border: 1px #999 solid; " class="ace_editor_wrapper ">
-			<div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
-		</div>
-        
+		<div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
 		<div id="wiki-content-preview" style="display: none; border: 1px #999 solid;">
 			<div id="wiki-content" class="wiki-content"></div>
 		</div>
-		<button id="submit-btn">Save</button>
+		<button id="submit-btn" style="position: fixed; bottom: 0px;">Save</button>
 	</form>
 </div>
 <script type="text/javascript" src="/static/ace/ace.js" type="text/javascript" charset="utf-8"></script>

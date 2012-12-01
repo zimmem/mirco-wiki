@@ -25,19 +25,14 @@ pre.prettyprint {
 }
 
 
-.ace_editor_wrapper {
-    
-    position: relative;
-    border: 1px solid #DDD;
-    margin: 5px;
-    height: 500px;
-}
+
 
 #markdown-editor { 
-        top: 0px;
+		position: absolute;
+        top: 20px;
         right: 0px;
-        bottom: 0px;
+        bottom: 2px;
         left: 0px;
-        margin: 0px;
-        height: 500px;
+        overflow: hidden;
+       
     }
