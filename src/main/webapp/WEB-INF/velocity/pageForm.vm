@@ -1,21 +1,42 @@
-<div style="margin: 50px;">
-	<form method="POST" action="/post_page">
+<div id="edit-form-wrapper" style="margin: 50px; display:none;">
+	<form id="markdown-form" method="POST" action="/post_page">
 		<input type="hidden" name="id" value="$!wikiPage.id" />
 		<input type="hidden" name="parentId" value="$!wikiPage.parentId" />
         <input type="hidden" id="wiki-val" name="wiki" />
 		<div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
-		<div id="wiki-content-preview" style="display: none; border: 1px #999 solid;">
-			<div id="wiki-content" class="wiki-content"></div>
-		</div>
-		<button id="submit-btn" style="position: fixed; bottom: 0px;">Save</button>
 	</form>
 </div>
+<div id="wiki-content-preview" style="display: none; border: 1px #999 solid;">
+     <div id="wiki-content" class="wiki-content"></div>
+</div>
 <script type="text/javascript" src="/static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/static/js/jquery.hotkeys.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var editor = ace.edit("markdown-editor");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/markdown");
-    $('#submit-btn').click(function(){
-        $('#wiki-val').val(editor.getValue());
+    editor.commands.addCommand({
+        name: 'markdown-save',
+        bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+        exec: function(editor) {
+            $('#wiki-val').val(editor.getValue());
+            $.post("/post_page", $('#markdown-form').serialize(), function(){
+            
+            });
+        }
     });
+    editor.commands.addCommand({
+        name: 'markdown-preview',
+        bindKey: {win: 'Ctrl-P',  mac: 'Command-P'},
+        exec: function(editor) {
+           jQuery.post('/api-wiki/render', {
+			'wiki' : editor.getValue()
+    		}, function(data) {
+    			$('#wiki-content').html(data);
+                $('#edit-form-wrapper').toggle();
+    			$('#wiki-content-preview').toggle();
+    		});
+        }
+    });
+    $('#edit-form-wrapper').show();
 </script>

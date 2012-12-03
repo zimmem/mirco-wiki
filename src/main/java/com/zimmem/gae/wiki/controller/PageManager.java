@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.petebevin.markdown.MarkdownProcessor;
 import com.zimmem.gae.wiki.model.WikiPage;
@@ -22,13 +23,14 @@ public class PageManager {
     @Autowired
     private WikiPageService wikpagePageService;
 
+    @ResponseBody
     @RequestMapping(value = "/post_page", method = RequestMethod.POST)
     public String postPage(WikiPage wikiPage) throws IOException {
         MarkdownProcessor process = new MarkdownProcessor();
         wikiPage.setHtml(process.markdown(wikiPage.getWiki()));
         wikiPage.setTitle(parseFirstLine(wikiPage.getWiki()));
         wikpagePageService.saveWikiPage(wikiPage);
-        return "redirect:/page?id=" + wikiPage.getId();
+        return "success";
     }
 
     @RequestMapping(value = "/edit_page", method = RequestMethod.GET)

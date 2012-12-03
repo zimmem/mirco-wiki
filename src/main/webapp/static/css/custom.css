@@ -7,8 +7,6 @@ body {
 	margin: 20px;
 }
 
-
-
 pre {
 	border: dashed 1px #3C78B5;
 	padding: 10px;
@@ -24,15 +22,21 @@ pre.prettyprint {
 	border: dashed 1px #3C78B5;
 }
 
+#markdown-editor {
+	position: absolute;
+	top: 20px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	overflow: hidden;
+}
 
-
-
-#markdown-editor { 
-		position: absolute;
-        top: 20px;
-        right: 0px;
-        bottom: 2px;
-        left: 0px;
-        overflow: hidden;
-       
-    }
+#wiki-content-preview{
+	position: absolute;
+	top: 20px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	z-index: 1000;
+	
+}
