@@ -1,7 +1,7 @@
 #if($wikiPages && $wikiPages.size()>0)
 <ul>
 	#foreach($wikiPage in $wikiPages)
-	<li><p><a href="/page?id=$!{wikiPage.id}">$esc.html($!{wikiPage.title})</a>  <span class="grey">($!{wikiPage.editor.nickname} $!{wikiPage.modifiedTime})</span><p></li> 
+	<li><a href="/page?id=$!{wikiPage.id}">$esc.html($!{wikiPage.title})</a>  <span class="grey">($!{wikiPage.editor.nickname} $!{wikiPage.modifiedTime})</span></li> 
 	#end
 </ul>
 #end

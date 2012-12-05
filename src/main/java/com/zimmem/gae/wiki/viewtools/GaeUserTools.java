@@ -24,5 +24,9 @@ public class GaeUserTools {
     public String getLogoutUrl() {
         return userService.createLogoutURL("");
     }
+    
+    public boolean isAdmin(){
+        return userService.isUserAdmin();
+    }
 
 }

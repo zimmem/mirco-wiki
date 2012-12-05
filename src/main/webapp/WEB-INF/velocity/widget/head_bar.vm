@@ -1,4 +1,4 @@
-<div id="header">
+<!-- <div id="header">
 <ul id="header-menu-bar" class="ajs-menu-bar">
 		#if($wikiPage)
 		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="/create_page?parentId=$!{wikiPage.id}">New Page</a></li> 
@@ -20,12 +20,28 @@
 		<li><span>&gt; <a href="/page?id=$!{wikiPage.id}">$!{wikiPage.title}</a> </span></li>
 		#end
 	</ol>
-	
-
-
 </div>
-
-
-
-
+</div>
+ -->
+<div class="navbar">
+  <div class="navbar-inner navbar-fixed-top" style="width:1070px;margin:auto;">
+     
+        <a class="brand" >WIKI.zimmem.com</a>
+        <ul class="nav">
+          <li class="active"><a href="#">Home</a></li>
+        </ul> 
+        
+        #if($gaeUser.login && $wikiPage && $gaeUser.admin )
+        <div class="btn-group">
+               <a class="btn"  href="/edit_page?id=$!{wikiPage.id}">Edit</a>
+               <a class="btn"  href="/create_page?parentId=$!{wikiPage.id}">Add Child</a>
+         </div>   
+         #else
+            <a class="btn" href="/create_page">New Page</a>
+         #end
+         #if($gaeUser.login)
+         <p class="navbar-text pull-right">$!{gaeUser.nickname}</p>
+         #end
+   
+  </div>
 </div>

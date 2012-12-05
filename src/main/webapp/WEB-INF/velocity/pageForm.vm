@@ -1,17 +1,35 @@
-<div id="edit-form-wrapper" style="margin: 50px; display:none;">
-	<form id="markdown-form" method="POST" action="/post_page">
-		<input type="hidden" name="id" value="$!wikiPage.id" />
-		<input type="hidden" name="parentId" value="$!wikiPage.parentId" />
-        <input type="hidden" id="wiki-val" name="wiki" />
-		<div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
-	</form>
-</div>
-<div id="wiki-content-preview" style="display: none; border: 1px #999 solid;">
-     <div id="wiki-content" class="wiki-content"></div>
-</div>
+#set( $layout= "layout/empty.vm")
+<html>
+<head>
+<title>#if($title)$title - #end $!{metadata.title}</title>
+#foreach($data in $metas.all)
+<meta name="$!{data.name}" content="$!esc.html(${data.content})"/>
+#end
+<link type="text/css" rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="/static/js/google-code-prettify/prettify.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/custom.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/google-code-prettify/prettify.js" ></script>
+<script type="text/javascript" src="/static/js/mirco-wiki.js" ></script>
 <script type="text/javascript" src="/static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="/static/js/jquery.hotkeys.js" type="text/javascript" charset="utf-8"></script>
-<script>
+</head>
+<body>
+    <div id="edit-form-wrapper" style="margin: 50px; display:none;">
+    	<form id="markdown-form">
+    		<input type="hidden" name="id" value="$!wikiPage.id" />
+    		<input type="hidden" name="parentId" value="$!wikiPage.parentId" />
+            <input type="hidden" id="wiki-val" name="wiki" />
+    		<div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
+    	</form>
+    </div>
+    <div id="wiki-content-preview" style="display: none; border: 1px #999 solid;">
+         <div id="wiki-content" class="wiki-content"></div>
+    </div>
+    <div id="main">$screen_content</div>
+    <div id="copyright">&copy; 2011 Zimmem.com, Power by Google App Engine</div>
+    <script>
     var editor = ace.edit("markdown-editor");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/markdown");
@@ -30,13 +48,15 @@
         bindKey: {win: 'Ctrl-P',  mac: 'Command-P'},
         exec: function(editor) {
            jQuery.post('/api-wiki/render', {
-			'wiki' : editor.getValue()
-    		}, function(data) {
-    			$('#wiki-content').html(data);
+            'wiki' : editor.getValue()
+            }, function(data) {
+                $('#wiki-content').html(data);
                 $('#edit-form-wrapper').toggle();
-    			$('#wiki-content-preview').toggle();
-    		});
+                $('#wiki-content-preview').toggle();
+            });
         }
     });
     $('#edit-form-wrapper').show();
 </script>
+</body>
+</html>
