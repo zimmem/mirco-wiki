@@ -16,6 +16,10 @@
 <script type="text/javascript" src="/static/js/jquery.hotkeys.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
+    <div class="btn-toolbar"><div class="btn-group">
+         <button class="btn">save</button>
+         <button class="btn">preview</button>
+    </div></div>
     <div id="edit-form-wrapper" style="margin: 50px; display:none;">
     	<form id="markdown-form">
     		<input type="hidden" name="id" value="$!wikiPage.id" />

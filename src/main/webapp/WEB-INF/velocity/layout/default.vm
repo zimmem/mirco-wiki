@@ -16,6 +16,7 @@
     <div style="width:1070px; margin:auto;padding-top: 50px;">
 	#parse("widget/head_bar.vm")
 	<div id="main">$screen_content</div>
+    <hr>
 	<div id="copyright">&copy; 2011 Zimmem.com, Power by Google App Engine</div>
     </div>
 </body>

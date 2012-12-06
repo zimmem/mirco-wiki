@@ -70,6 +70,7 @@
 			<web-resource-name>wiki writer</web-resource-name>
 			<url-pattern>/create_page</url-pattern>
 			<url-pattern>/edit_page</url-pattern>
+			<url-pattern>/_search/fullBuild</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>admin</role-name>

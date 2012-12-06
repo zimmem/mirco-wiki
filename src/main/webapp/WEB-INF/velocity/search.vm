@@ -1,0 +1,8 @@
+<ul>
+#foreach($page in $pages)
+<h3><a href="/page?id=${page.id}">${page.title}</a></h3>
+<div>
+    $!{page.wiki}
+</div>
+#end
+</ul>
