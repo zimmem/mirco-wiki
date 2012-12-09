@@ -1,47 +1,42 @@
-<!-- <div id="header">
-<ul id="header-menu-bar" class="ajs-menu-bar">
-		#if($wikiPage)
-		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="/create_page?parentId=$!{wikiPage.id}">New Page</a></li> 
-		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="/edit_page?id=$!{wikiPage.id}">Edit</a></li> 
-		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="/page/history?id=$!{wikiPage.id}">History</a></li>
-		#else
-		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="/create_page">New Page</a></li> 
-		#end 
-		#if($gaeUser.login)
-		<li class="normal ajs-menu-item"><a id="user-menu-link" class="user trigger ajs-menu-title" href="#"><span>$!{gaeUser.nickname}</span> </a></li>
-		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="$!{gaeUser.logoutUrl}">Logout</a></li> 
-		#else
-		<li class="normal ajs-menu-item"><a class="user trigger ajs-menu-title" href="$!{gaeUser.loginUrl}">Login</a></li> 
-		#end
-	</ul>
-	<ol id="breadcrumbs">
-		<li><span> <a href="/">Home</a> </span></li>
-		#if($wikiPage) 
-		<li><span>&gt; <a href="/page?id=$!{wikiPage.id}">$!{wikiPage.title}</a> </span></li>
-		#end
-	</ol>
-</div>
-</div>
- -->
-<div class="navbar">
-  <div class="navbar-inner navbar-fixed-top" style="width:1070px;margin:auto;">
-     
-        <a class="brand" >WIKI.zimmem.com</a>
-        <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-        </ul> 
-        
-        #if($gaeUser.login && $wikiPage && $gaeUser.admin )
-        <div class="btn-group">
-               <a class="btn"  href="/edit_page?id=$!{wikiPage.id}">Edit</a>
-               <a class="btn"  href="/create_page?parentId=$!{wikiPage.id}">Add Child</a>
-         </div>   
-         #else
-            <a class="btn" href="/create_page">New Page</a>
-         #end
-         #if($gaeUser.login)
-         <p class="navbar-text pull-right">$!{gaeUser.nickname}</p>
-         #end
-   
-  </div>
-</div>
+<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Mirco-wiki</a>
+          <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav">
+              <li class="active"><a href="/">Home</a></li>
+            </ul>
+            <form class="navbar-search pull-left" action="/search" _lpchecked="1">
+              <input name="q" type="text" class="search-query span2" placeholder="Search">
+            </form>
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Action <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                   #if($wikiPage)
+                  <li><a href="/create_page?parentId=${wikiPage.id}">Add child</a></li>
+                  <li><a href="/edit_page?id=${wikiPage.id}">Edit</a></li>
+                  <li class="divider"></li>
+                  #end
+                  <li><a href="/create_page">New Page</a></li>
+                </ul>
+              </li>
+              #if($gaeUser.login)
+              <li class="divider-vertical"></li>
+              <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">$!{gaeUser.nickname} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="$!{gaeUser.logoutUrl}">Logout</a></li>
+                </ul>
+              </li>
+              #end
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div>
+      </div><!-- /navbar-inner -->
+    </div>

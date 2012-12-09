@@ -2,7 +2,7 @@ var mirco_wiki={
 
 prettyCode:function(){
 	$(function(){
-		$('pre').addClass('prettyprint');
+		$('pre').addClass('prettyprint').addClass('linenums:1');
 		prettyPrint();
 	});
 },

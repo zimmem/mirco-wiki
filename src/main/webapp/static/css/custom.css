@@ -1,3 +1,4 @@
+
 body {
 	background: #FFF;
 }
@@ -7,20 +8,11 @@ body {
 	margin: 20px;
 }
 
-pre {
-	border: dashed 1px #3C78B5;
-	padding: 10px;
-	margin: 15px;
-}
 
-pre.prettyprint {
-	margin-left: 40px;
-	margin-right: 20px;
-	padding-bottom: 20px;
-	padding-left: 10px;
-	background-color: #F9F9F9;
-	border: dashed 1px #3C78B5;
-}
+
+.search-snipeet b{
+	color: red;
+} 
 
 #markdown-editor {
 	position: absolute;
@@ -40,3 +32,12 @@ pre.prettyprint {
 	z-index: 1000;
 	
 }
+
+
+
+/**bootstrap custom*/
+.navbar{
+	width:1200px;
+	margin:auto;
+}
+/**bootstrap custom end*/

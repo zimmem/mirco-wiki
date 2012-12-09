@@ -73,17 +73,14 @@ public class SearchController {
 
     private WikiPage convertFromDocument(ScoredDocument document) {
         WikiPage page = new WikiPage();
-        page.setTitle(getFirstField(document, "title").getText());
-        page.setHtml(getFirstField(document, "content").getHTML());
-        page.setId(getFirstField(document, "id").getNumber().longValue());
-        page.setModifiedTime(getFirstField(document, "modify_date").getDate());
+        page.setTitle(document.getOnlyField("title").getText());
+        page.setHtml(document.getOnlyField("content").getHTML());
+        page.setId(document.getOnlyField("id").getNumber().longValue());
+        page.setModifiedTime(document.getOnlyField("modify_date").getDate());
         List<Field> expressions = document.getExpressions();
         page.setWiki(expressions.get(0).getHTML());
         return page;
 
     }
 
-    private Field getFirstField(Document document, String name) {
-        return document.getFields(name).iterator().next();
-    }
 }

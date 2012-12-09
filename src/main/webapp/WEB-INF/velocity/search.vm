@@ -1,7 +1,7 @@
 <ul>
 #foreach($page in $pages)
-<h3><a href="/page?id=${page.id}">${page.title}</a></h3>
-<div>
+<h4><a href="/page?id=${page.id}">${page.title}</a></h4>
+<div class="search-snipeet">
     $!{page.wiki}
 </div>
 #end
