@@ -44,10 +44,10 @@
 		</property>
 	</bean>
 
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+	<bean id="viewResolver" class="com.zimmem.springframework.web.servlet.view.velocity.COCVelocityLayoutVeiwResolver">
 		<property name="suffix" value=".vm" />
 		<property name="exposeSpringMacroHelpers" value="true" />
-		<property name="layoutUrl" value="/layout/default.vm" />
+		<property name="layouts" value="/layout" />
 		<property name="dateToolAttribute" value="dateTool" />
 		<property name="contentType">
 			<value>text/html;charset=UTF-8</value>
