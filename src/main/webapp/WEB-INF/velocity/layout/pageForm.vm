@@ -6,19 +6,15 @@
 <meta name="$!{data.name}" content="$!esc.html(${data.content})"/>
 #end
 <link type="text/css" rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
-<link type="text/css" rel="stylesheet" href="/static/google-code-prettify/prettify.css" />
 <link type="text/css" rel="stylesheet" href="/static/css/custom.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="/static/google-code-prettify/prettify.js" ></script>
 <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/google-code-prettify/prettify.js" ></script>
 <script type="text/javascript" src="/static/js/mirco-wiki.js" ></script>
+<script type="text/javascript" src="/static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/static/js/jquery.hotkeys.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-    <div style="width:1070px; margin:auto;padding-top: 50px;">
-	#parse("widget/head_bar.vm")
-	<div id="main">$screen_content</div>
-    <hr>
-	<div id="copyright">&copy; 2012 Zimmem.com, Power by Google App Engine</div>
-    </div>
+   $screen_content
 </body>
 </html>

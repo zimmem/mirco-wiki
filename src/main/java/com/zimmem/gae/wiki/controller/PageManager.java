@@ -25,12 +25,11 @@ public class PageManager {
 
     @ResponseBody
     @RequestMapping(value = "/post_page", method = RequestMethod.POST)
-    public String postPage(WikiPage wikiPage) throws IOException {
+    public WikiPage postPage(WikiPage wikiPage) throws IOException {
         MarkdownProcessor process = new MarkdownProcessor();
         wikiPage.setHtml(process.markdown(wikiPage.getWiki()));
-        wikiPage.setTitle(parseFirstLine(wikiPage.getWiki()));
         wikpagePageService.saveWikiPage(wikiPage);
-        return "success";
+        return wikiPage;
     }
 
     @RequestMapping(value = "/edit_page", method = RequestMethod.GET)

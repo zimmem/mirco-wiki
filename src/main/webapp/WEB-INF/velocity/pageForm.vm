@@ -1,51 +1,40 @@
-#set( $layout= "layout/empty.vm")
-<html>
-<head>
-<title>#if($title)$title - #end $!{metadata.title}</title>
-#foreach($data in $metas.all)
-<meta name="$!{data.name}" content="$!esc.html(${data.content})"/>
-#end
-<link type="text/css" rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
-<link type="text/css" rel="stylesheet" href="/static/js/google-code-prettify/prettify.css" />
-<link type="text/css" rel="stylesheet" href="/static/css/custom.css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/static/google-code-prettify/prettify.js" ></script>
-<script type="text/javascript" src="/static/js/mirco-wiki.js" ></script>
-<script type="text/javascript" src="/static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="/static/js/jquery.hotkeys.js" type="text/javascript" charset="utf-8"></script>
-</head>
-<body>
-    <div class="btn-toolbar"><div class="btn-group">
-         <button class="btn">save</button>
-         <button class="btn">preview</button>
-    </div></div>
+<form id="markdown-form">
+    <input type="hidden" id="pageId" name="id" value="$!wikiPage.id" />
+    <input type="hidden" name="parentId" value="$!wikiPage.parentId" />
+    <input type="hidden" id="wiki-val" name="wiki" />
+    <div>
+        <div class="btn-toolbar form-inline">
+        <input type="text" name="title" class="input-xxlarge" value="$!esc.html($!wikiPage.title)" placeholder="title"/>
+        <div class="btn-group">
+             <a id="btn-save" class="btn btn-primary">save</a>
+             <a class="btn">preview</a>
+        </div>
+        </div>
+    </div>
     <div id="edit-form-wrapper" style="margin: 50px; display:none;">
-    	<form id="markdown-form">
-    		<input type="hidden" name="id" value="$!wikiPage.id" />
-    		<input type="hidden" name="parentId" value="$!wikiPage.parentId" />
-            <input type="hidden" id="wiki-val" name="wiki" />
-    		<div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
-    	</form>
+        <div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
     </div>
-    <div id="wiki-content-preview" style="display: none; border: 1px #999 solid;">
-         <div id="wiki-content" class="wiki-content"></div>
-    </div>
-    <div id="main">$screen_content</div>
-    <div id="copyright">&copy; 2011 Zimmem.com, Power by Google App Engine</div>
-    <script>
+</form>
+<script>
     var editor = ace.edit("markdown-editor");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/markdown");
+    
+    function saveWiki(){
+        $('#wiki-val').val(editor.getValue());
+        $.post("/post_page", $('#markdown-form').serialize(), function(data){
+        	if(data.id != undefined && data.id != undefined > 0){
+        	    console.info("post wiki success");
+        	   $('#pageId').val(data.id);
+        	}
+        }, 'json');
+    }
+    $('#btn-save').click(saveWiki);
+    $(document).bind('keydown', 'Ctrl+s', saveWiki);
     editor.commands.addCommand({
         name: 'markdown-save',
         bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
-        exec: function(editor) {
-            $('#wiki-val').val(editor.getValue());
-            $.post("/post_page", $('#markdown-form').serialize(), function(){
-            
-            });
-        }
+        exec: saveWiki
     });
     editor.commands.addCommand({
         name: 'markdown-preview',
@@ -62,5 +51,3 @@
     });
     $('#edit-form-wrapper').show();
 </script>
-</body>
-</html>
