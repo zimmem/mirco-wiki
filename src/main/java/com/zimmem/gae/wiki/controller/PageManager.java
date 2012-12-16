@@ -2,9 +2,6 @@ package com.zimmem.gae.wiki.controller;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,31 +43,6 @@ public class PageManager {
         page.setParentId(parentId);
         model.put("wikiPage", page);
         return "/pageForm";
-    }
-
-    private String parseFirstLine(String text) {
-        int index = text.indexOf("\r\n");
-        if (index < 0) {
-            index = text.indexOf("\n");
-        }
-
-        if (index < 0) {
-            return text;
-        }
-        return text.substring(0, index);
-
-    }
-
-    public static void main(String[] args) {
-        String text = "\n\n    sdfsf\n    sdfsdf\n\n";
-        Pattern pattern = Pattern.compile("(?:\\n\\n|\\A)((?:(?:[ ]{4}).*\\n+)+)((?=^[ ]{0,4}\\S)|\\Z)", Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(text);
-       if(matcher.find()){
-        System.out.println(matcher.group());
-       }
-        MarkdownProcessor processor = new MarkdownProcessor();
-        String markdown = processor.markdown("\r\n\n    sdfsf\n    sdfsdf\n\n");
-        System.out.println(markdown);
     }
 
 }
