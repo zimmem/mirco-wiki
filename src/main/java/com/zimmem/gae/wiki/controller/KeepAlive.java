@@ -1,20 +1,15 @@
 package com.zimmem.gae.wiki.controller;
 
-import java.io.IOException;
-import java.io.Writer;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class KeepAlive {
 
+    @ResponseBody
     @RequestMapping("/keep_alive")
-    public void keep(Writer writer) throws InterruptedException {
-        try {
-            Thread.sleep(600000);
-            writer.write(String.valueOf(System.currentTimeMillis()));
-        } catch (IOException e) {
-        }
+    public String keep() throws InterruptedException {
+       return "Success";
     }
 }

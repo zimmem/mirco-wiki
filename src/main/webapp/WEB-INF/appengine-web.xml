@@ -11,9 +11,8 @@
 
 	<sessions-enabled>true</sessions-enabled>
 	<static-files>
-		<include path="/static/**.css" />
 		<include path="/favicon.ico" />
-		<include path="/static/**.js" />
+		<include path="/static/**.*" />
 		<include path="/robots.txt" />
 		<include path="/*.html" />
 	</static-files>

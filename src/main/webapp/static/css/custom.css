@@ -48,4 +48,14 @@ body {
 
 p{line-height: 2em;text-indent: 2em;}
 
+li p{text-indent: 0
+
+
+.article{
+    border: 1px solid #EEE;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 5px #DDD;
+    padding: 20px;
+    margin-top: 20px;
+}
 
