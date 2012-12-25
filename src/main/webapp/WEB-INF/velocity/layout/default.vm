@@ -18,7 +18,10 @@
 	#parse("widget/head_bar.vm")
 	<div id="main">$screen_content</div>
     <hr>
-	<div id="copyright">&copy; 2012 Zimmem.com, Power by Google App Engine</div>
+        <div id="copyright">
+            <p>&copy; 2012 zimmem.com, Power by Google App Engine.</p>
+            <p>Package: $!metadata.getSysProp("build.version")-$!metadata.getSysProp("build.time")</p>
+        </div>
     </div>
 </body>
 </html>

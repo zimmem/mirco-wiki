@@ -15,13 +15,6 @@ body {
 	background: #FFF;
 }
 
-#copyright {
-	text-align: center;
-	margin: 20px;
-}
-
-
-
 .search-snipeet b{
 	color: red;
 } 
@@ -58,4 +51,12 @@ li p{text-indent: 0;}
     padding: 20px;
     margin-top: 20px;
 }
+
+
+#copyright {
+	text-align: right;
+	margin: 20px;
+}
+
+#copyright p{text-indent: 0; line-height: 1.2em;}
 

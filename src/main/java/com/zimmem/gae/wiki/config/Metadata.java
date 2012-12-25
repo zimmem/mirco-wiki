@@ -6,7 +6,7 @@ public class Metadata {
         return getSysProp("mircowiki.metadata.title");
     }
 
-    private String getSysProp(String key) {
+    public String getSysProp(String key) {
         return System.getProperty(key);
     }
 }

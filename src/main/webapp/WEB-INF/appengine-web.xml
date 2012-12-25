@@ -7,6 +7,8 @@
 		<property name="java.util.logging.config.file" value="WEB-INF/classes/logging.properties" />
 		<property name="mircowiki.metadata.title" value="${mircowiki.metadata.title}" />
 		<property name="velocity.dateformat.default" value="${velocity.dateformat.default}" />
+		<property name="build.version" value="${project.build.finalName}" />
+		<property name="build.time" value="${gae.application.version}" />
 	</system-properties>
 
 	<sessions-enabled>true</sessions-enabled>
