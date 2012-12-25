@@ -2,7 +2,7 @@ $metas.add("author",$!{wikiPage.editor.nickname})
 $metas.add("keywords",$!{wikiPage.title})
 $metas.add("description",$!{wikiPage.wiki})
 #set($title=$esc.html($!{wikiPage.title}))
-<article class=".article">
+<article class="article">
     <header class="page-header">
       <h1>$esc.html($!{wikiPage.title}) </h1>
       <small>Added By $!{wikiPage.creater.nickname}, last edited by $!{wikiPage.editor.nickname} on $!{wikiPage.modifiedTime}</small>
