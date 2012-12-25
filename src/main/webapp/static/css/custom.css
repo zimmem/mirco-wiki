@@ -46,4 +46,11 @@ body {
 }
 
 
+.article{
+    border: 1px solid #EEE;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 5px #DDD;
+    padding: 20px;
+    margin-top: 20px;
+}
 
