@@ -1,6 +1,5 @@
 /**bootstrap custom*/
 .navbar{
-	width:1200px;
 	margin:auto;
 }
 
@@ -48,7 +47,7 @@ li p{text-indent: 0;}
     border: 1px solid #EEE;
     border-radius: 5px;
     box-shadow: 0 0 5px 5px #DDD;
-    padding: 20px;
+    padding: 25px;
     margin-top: 20px;
 }
 
