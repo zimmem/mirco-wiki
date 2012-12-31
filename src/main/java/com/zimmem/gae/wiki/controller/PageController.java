@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.appengine.api.users.UserServiceFactory;
 import com.petebevin.markdown.MarkdownProcessor;
 import com.zimmem.gae.wiki.model.WikiPage;
 import com.zimmem.gae.wiki.service.WikiPageService;
 
 @Controller
-public class PageManager {
+public class PageController {
 
     @Autowired
     private WikiPageService wikpagePageService;
@@ -43,6 +44,16 @@ public class PageManager {
         page.setParentId(parentId);
         model.put("wikiPage", page);
         return "/pageForm";
+    }
+    
+    @RequestMapping(value = "/preview", method = RequestMethod.POST)
+    public String preview(WikiPage wikiPage, Map<String, Object> model){
+        MarkdownProcessor process = new MarkdownProcessor();
+        wikiPage.setHtml(process.markdown(wikiPage.getWiki()));
+        wikiPage.setCreater(UserServiceFactory.getUserService().getCurrentUser());
+        wikiPage.setEditor(UserServiceFactory.getUserService().getCurrentUser());
+        model.put("wikiPage", wikiPage);
+        return "/page";
     }
 
 }

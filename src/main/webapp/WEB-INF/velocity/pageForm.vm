@@ -1,4 +1,4 @@
-<form id="markdown-form">
+<form id="markdown-form" action="/preview" method="post">
     <input type="hidden" id="pageId" name="id" value="$!wikiPage.id" />
     <input type="hidden" name="parentId" value="$!wikiPage.parentId" />
     <input type="hidden" id="wiki-val" name="wiki" />
@@ -42,7 +42,7 @@
         <input type="text" name="title" class="input-xxlarge" value="$!esc.html($!wikiPage.title)" placeholder="title"/>
         <div class="btn-group">
              <a id="btn-save" class="btn btn-primary">save</a>
-             <a class="btn">preview</a>
+             <a id="btn-preview" class="btn">preview</a>
         </div>
         </div>
     </div>
@@ -65,13 +65,19 @@ $(function(){
         $('#wiki-val').val(editor.getValue());
         $.post("/post_page", $('#markdown-form').serialize(), function(data){
         	if(data.id != undefined && data.id != undefined > 0){
-        	    console.info("post wiki success");
         	   $('#pageId').val(data.id);
         	}
         }, 'json');
     }
+    
+    $('#markdown-form').attr('target', 'wikipreview_' + new Date().getTime());
+    function preview(){
+        $('#wiki-val').val(editor.getValue());
+        $('#markdown-form').submit();
+    }
     $('#btn-save').click(saveWiki);
-    $(document).bind('keydown', 'Ctrl+s', saveWiki);
+    $('#btn-preview').click(preview);
+    
     editor.commands.addCommand({
         name: 'markdown-save',
         bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
@@ -80,15 +86,7 @@ $(function(){
     editor.commands.addCommand({
         name: 'markdown-preview',
         bindKey: {win: 'Ctrl-P',  mac: 'Command-P'},
-        exec: function(editor) {
-           jQuery.post('/api-wiki/render', {
-            'wiki' : editor.getValue()
-            }, function(data) {
-                $('#wiki-content').html(data);
-                $('#edit-form-wrapper').toggle();
-                $('#wiki-content-preview').toggle();
-            });
-        }
+        exec: preview
     });
     $('#edit-form-wrapper').show();
 });
