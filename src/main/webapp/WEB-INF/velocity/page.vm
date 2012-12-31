@@ -1,6 +1,5 @@
 $metas.add("author",$!{wikiPage.editor.nickname})
 $metas.add("keywords",$!{wikiPage.title})
-$metas.add("description",$!{wikiPage.wiki})
 #set($title=$esc.html($!{wikiPage.title}))
 <article class="article">
     <header class="page-header">

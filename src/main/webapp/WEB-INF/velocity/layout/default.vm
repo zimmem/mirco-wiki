@@ -14,7 +14,7 @@
 <script type="text/javascript" src="/static/js/mirco-wiki.js" ></script>
 </head>
 <body>
-    <div class="container" style="padding-top: 50px;">
+    <div class="container">
 	#parse("widget/head_bar.vm")
 	<div id="main">$screen_content</div>
     <hr>
