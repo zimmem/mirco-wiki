@@ -22,18 +22,18 @@ import com.google.appengine.api.search.Results;
 import com.google.appengine.api.search.ScoredDocument;
 import com.google.appengine.api.search.SearchServiceFactory;
 import com.zimmem.gae.wiki.model.WikiPage;
-import com.zimmem.gae.wiki.service.WikiPageService;
+import com.zimmem.gae.wiki.repository.WikiPageRepository;
 
 @Controller
 public class SearchController {
 
     @Autowired
-    private WikiPageService wikiPageService;
+    private WikiPageRepository wikiPageRepository;
 
     @RequestMapping("/_search/fullBuild")
     @ResponseBody
     public String fullBuild() {
-        List<WikiPage> allPage = wikiPageService.listRootWikiPages();
+        List<WikiPage> allPage = wikiPageRepository.listRootWikiPages();
         for (WikiPage wikiPage : allPage) {
             Builder builder = Document.newBuilder().setId("article_" + wikiPage.getId());
             builder.addField(Field.newBuilder().setName("id").setNumber(wikiPage.getId()));
@@ -50,9 +50,9 @@ public class SearchController {
 
     @RequestMapping("/search")
     public Map<String, Object> search(@RequestParam("q") String qstr) {
-        //FieldExpression expression = FieldExpression.newBuilder().setName("snippet").setExpression("snippet(\""
-        //                                                                                                   + qstr
-        //                                                                                                   + "\",content,10,4)").build();
+        // FieldExpression expression = FieldExpression.newBuilder().setName("snippet").setExpression("snippet(\""
+        // + qstr
+        // + "\",content,10,4)").build();
         QueryOptions options = QueryOptions.newBuilder().setFieldsToSnippet("content").build();
         Query query = Query.newBuilder().setOptions(options).build(qstr);
         Results<ScoredDocument> documents = getIndex().search(query);

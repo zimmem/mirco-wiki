@@ -1,17 +1,13 @@
 package com.zimmem.gae.wiki.model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -19,35 +15,38 @@ import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.users.User;
 
 @Entity
-public class WikiPage {
+public class WikiPage implements Serializable {
+
+    private static final long serialVersionUID = 5521589204800405879L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long               id;
+    private Long              id;
 
-    private String             title;
+    private String            title;
     @Basic
-    private User               creater;
+    private User              creater;
     @Basic
-    private User               editor;
+    private User              editor;
 
-    private Date               createTime;
+    private Date              createTime;
 
-    private Date               modifiedTime;
+    private Date              modifiedTime;
 
-    private Long               parentId;
+    private Long              parentId;
 
-    private Integer                version;
-
-    @Basic
-    private Text               wikiText;
+    private Integer           version;
 
     @Basic
-    private Text               htmlText;
+    private Text              wikiText;
 
-    @OneToMany(mappedBy = "wikiPage", cascade = CascadeType.ALL)
-    @OrderBy("version desc")
-    private List<WikiRevision> revisions;
+    @Basic
+    private Text              htmlText;
+
+    //
+    // @OneToMany(mappedBy = "wikiPage", cascade = CascadeType.ALL)
+    // @OrderBy("version desc")
+    // private List<WikiRevision> revisions;
 
     public Long getId() {
         return id;
@@ -145,25 +144,24 @@ public class WikiPage {
         this.version = version;
     }
 
-    public List<WikiRevision> getRevisions() {
-        return revisions;
-    }
+    // public List<WikiRevision> getRevisions() {
+    // return revisions;
+    // }
 
-    public void setRevisions(List<WikiRevision> revisions) {
-        this.revisions = revisions;
-    }
-    
-    public void addRevision(WikiRevision revision){
-        if(revisions == null ){
-            revisions = new ArrayList<WikiRevision>();
-        }
-        revisions.add(revision);
-    }
+    // public void setRevisions(List<WikiRevision> revisions) {
+    // this.revisions = revisions;
+    // }
+    //
+    // public void addRevision(WikiRevision revision) {
+    // if (revisions == null) {
+    // revisions = new ArrayList<WikiRevision>();
+    // }
+    // revisions.add(revision);
+    // }
 
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
-    
-    
+
 }
