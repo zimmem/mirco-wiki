@@ -7,30 +7,31 @@
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<context:component-scan base-package="com.zimmem.gae.wiki.controller" />
-	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-		<property name="defaultHandler">
-			<bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
-		</property>
+	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<property name="removeSemicolonContent" value="false" />
+		<!-- <property name="defaultHandler"> <bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" /> </property> -->
 	</bean>
 
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<!-- <property name="webBindingInitializer"> <bean class="com.zimmem.zhome.spring.mvc.DefaultWebBindingInitializer" /> </property> -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="cacheSeconds" value="0" />
 		<property name="messageConverters">
 			<list>
 				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
 				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
-				<bean class="org.springframework.http.converter.StringHttpMessageConverter" >
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
 					<property name="supportedMediaTypes">
 						<list>
 							<value>text/plain;charset=UTF-8</value>
 						</list>
-					</property>					
+					</property>
 				</bean>
 				<bean class="org.springframework.http.converter.FormHttpMessageConverter" />
 				<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
 			</list>
 		</property>
 	</bean>
+
+
 	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
 
 	<bean name="id" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
@@ -50,7 +51,31 @@
 		</property>
 	</bean>
 
-	<bean id="viewResolver" class="com.zimmem.springframework.web.servlet.view.velocity.COCVelocityLayoutVeiwResolver">
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1" />
+		<property name="contentNegotiationManager">
+			<bean class="org.springframework.web.accept.ContentNegotiationManager">
+				<constructor-arg>
+					<bean class="org.springframework.web.accept.PathExtensionContentNegotiationStrategy">
+						<constructor-arg>
+							<map>
+								<entry key="json" value="application/json" />
+							</map>
+						</constructor-arg>
+					</bean>
+				</constructor-arg>
+			</bean>
+		</property>
+
+
+		<property name="defaultViews">
+			<list>
+				<!-- JSON View -->
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+			</list>
+		</property><!-- <property name="viewResolvers"> <list> </list> </property> -->
+	</bean>
+	<bean id="velocityView" class="com.zimmem.springframework.web.servlet.view.velocity.COCVelocityLayoutVeiwResolver">
 		<property name="suffix" value=".vm" />
 		<property name="exposeSpringMacroHelpers" value="true" />
 		<property name="layouts" value="/layout" />
@@ -67,11 +92,6 @@
 				<entry key="metadata" value-ref="metadata" />
 			</map>
 		</property>
-
 	</bean>
-
 	<bean id="metadata" class="com.zimmem.gae.wiki.config.Metadata" />
-
-
-	<!-- <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer"> <property name="customEditors"> <map> <entry key="com.google.appengine.api.datastore.Text" value="com.zimmem.zhome.util.google.TextPropertyEditer" /> </map> </property> </bean> -->
 </beans>

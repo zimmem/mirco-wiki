@@ -3,6 +3,9 @@ package com.zimmem.gae.wiki.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,7 +19,8 @@ public class Index {
 
     @RequestMapping("/")
     public String index(Map<String, Object> models) {
-        models.put("wikiPages", repository.listRootWikiPages());
+        Pageable pageable = new PageRequest(0, 20, Direction.DESC, "modifiedTime");
+        models.put("wikiPages", repository.listRootWikiPages(pageable));
         return "index";
 
     }

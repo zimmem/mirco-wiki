@@ -1,0 +1,35 @@
+#if($articles && $articles.size()>0)
+<ul class="article-list">
+    #foreach($article in $articles)
+    <li><h4>
+            <a href="/articles/id-$!{article.id}">$esc.html($!{article.title})</a> <small class="grey">($!{article.editor.nickname} $!{article.modifiedTime})</small>
+        </h4>
+    </li>
+     #end
+</ul>
+#end
+
+#if($page.totalPages > 0 )
+<div class="pagination">
+  <ul>
+    #if($page.number == 0)
+    <li  class="disabled" ><a>Pre</a></li>
+    #else
+    <li><a href="/articles/page-$page.number">Pre</a></li>
+    #end
+    #foreach($num in [1..$page.totalPages])
+        #if($num == $page.number + 1 )
+        <li  class="active"d><a  >$num</a></li>
+        #else
+        <li  ><a href="/articles/page-$num" >$num</a></li>
+        #end
+    #end
+    #if($page.number < $page.totalPages - 1 )
+        #set($next = $page.number + 2 )
+        <li><a href="/articles/page-$next">Next</a></li>
+    #else
+        <li class="disabled"><a>Next</a></li>
+    #end
+  </ul>
+</div>
+#end

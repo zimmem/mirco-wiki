@@ -9,7 +9,13 @@
           <span class="brand">Mirco-wiki</span>
           <div class="nav-collapse collapse navbar-responsive-collapse">
             <ul class="nav">
+              #if($activeTitle == "home")
               <li class="active"><a href="/">Home</a></li>
+              <li ><a href="/articles">Articles</a></li>
+              #else
+              <li ><a href="/">Home</a></li>
+              <li class="active"><a href="/articles">Articles</a></li>
+              #end
             </ul>
             <form class="navbar-search pull-left" action="/search" _lpchecked="1">
               <input name="q" type="text" class="search-query span2" placeholder="Search">
@@ -18,9 +24,9 @@
               <li class="dropdown">
                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Action <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                   #if($wikiPage)
-                  <li><a href="/create_page?parentId=${wikiPage.id}">Add child</a></li>
-                  <li><a href="/edit_page?id=${wikiPage.id}">Edit</a></li>
+                   #if($article)
+                  <li><a href="/create_page?parentId=${article.id}">Add child</a></li>
+                  <li><a href="/edit_page?id=${article.id}">Edit</a></li>
                   <li class="divider"></li>
                   #end
                   <li><a href="/create_page">New Page</a></li>

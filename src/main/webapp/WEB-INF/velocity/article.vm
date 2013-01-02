@@ -1,13 +1,13 @@
-$metas.add("author",$!{wikiPage.editor.nickname})
-$metas.add("keywords",$!{wikiPage.title})
-#set($title=$esc.html($!{wikiPage.title}))
+$metas.add("author",$!{article.editor.nickname})
+$metas.add("keywords",$!{article.title})
+#set($title=$esc.html($!{article.title}))
 <article class="article">
     <header class="page-header">
-      <h1>$esc.html($!{wikiPage.title}) </h1>
-      <small>Added By $!{wikiPage.creater.nickname}, last edited by $!{wikiPage.editor.nickname} on $!{wikiPage.modifiedTime}</small>
+      <h1>$esc.html($!{article.title}) </h1>
+      <small>Added By $!{article.creater.nickname}, last edited by $!{article.editor.nickname} on $!{article.modifiedTime}</small>
     </header>
     <div class="wiki-content">
-    	$!{wikiPage.html}
+    	$!{article.html}
     </div>
 </article>
 #if($children && $children.size()>0)

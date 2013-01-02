@@ -1,7 +1,10 @@
+#set($activeTitle = "home")
+<div class="recently-edit">
 #if($wikiPages && $wikiPages.size()>0)
 <ul>
 	#foreach($wikiPage in $wikiPages)
-	<li><h4><a href="/page?id=$!{wikiPage.id}">$esc.html($!{wikiPage.title})</a> <small class="grey">($!{wikiPage.editor.nickname} $!{wikiPage.modifiedTime})</small></h4></li> 
+	<li><h4><a href="/articles/id-$!{wikiPage.id}">$esc.html($!{wikiPage.title})</a> <small class="grey">($!{wikiPage.editor.nickname} $!{wikiPage.modifiedTime})</small></h4></li> 
 	#end
 </ul>
 #end
+</div>

@@ -1,26 +1,25 @@
 /**bootstrap custom*/
-.navbar{
-	margin:auto;
+.navbar {
+	margin: auto;
 }
 
-.btn-toolbar{
-	
+.btn-toolbar {
 	margin-left: 10px;
-	margin-rigth:10px;
+	margin-rigth: 10px;
 }
 /**bootstrap custom end*/
-
 body {
 	background: #FFF;
 }
 
-#main{
+#main {
 	padding-top: 50px;
+	margin: 15px;
 }
 
-.search-snipeet b{
+.search-snipeet b {
 	color: red;
-} 
+}
 
 #markdown-editor {
 	position: absolute;
@@ -31,30 +30,73 @@ body {
 	overflow: hidden;
 }
 
-#wiki-content-preview{
+#wiki-content-preview {
 	position: absolute;
 	top: 20px;
 	right: 0px;
 	bottom: 0px;
 	left: 0px;
 	z-index: 1000;
-	
 }
 
+.article-list {
+	margin-left: 0px;
+}
 
-p{line-height: 2em;text-indent: 2em;}
+.article-list li {
+	list-style: none;
+}
 
-li{line-height: 2em;}
+.article {
+	border: 1px solid #EEE;
+	border-radius: 5px;
+	box-shadow: 0 0 5px 5px #DDD;
+	padding: 25px;
+	margin-top: 20px;
+}
 
-li p{text-indent: 0;}
+.article p {
+	line-height: 2em;
+	text-indent: 2em;
+}
 
+.article li {
+	line-height: 2em;
+}
 
-.article{
-    border: 1px solid #EEE;
-    border-radius: 5px;
-    box-shadow: 0 0 5px 5px #DDD;
-    padding: 25px;
-    margin-top: 20px;
+.article li p {
+	text-indent: 0;
+}
+
+.recently-edit {
+	border: 1px solid #EEE;
+	border-radius: 5px;
+	position: relative;
+	padding-top: 40px;
+}
+
+.recently-edit::after {
+  content: "Recently updated";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #9da0a4;
+  -webkit-border-radius: 4px 0 4px 0;
+     -moz-border-radius: 4px 0 4px 0;
+          border-radius: 4px 0 4px 0;
+}
+
+.recently-edit {
+	margin-left: 0px;
+}
+
+.recently-edit li {
+	list-style: none;
 }
 
 
@@ -63,5 +105,7 @@ li p{text-indent: 0;}
 	margin: 20px;
 }
 
-#copyright p{text-indent: 0; line-height: 1.2em;}
-
+#copyright p {
+	text-indent: 0;
+	line-height: 1.2em;
+}

@@ -4,7 +4,7 @@
     <version>${gae.application.version}</version>
 
 	<system-properties>
-		<property name="java.util.logging.config.file" value="WEB-INF/classes/logging.properties" />
+		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
 		<property name="mircowiki.metadata.title" value="${mircowiki.metadata.title}" />
 		<property name="velocity.dateformat.default" value="${velocity.dateformat.default}" />
 		<property name="build.version" value="${project.build.finalName}" />
