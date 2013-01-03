@@ -5,7 +5,7 @@
 	<!-- The Basics -->
 	<groupId>com.zimmem</groupId>
 	<artifactId>mirco.wiki</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<packaging>war</packaging>
 
 	<name>gae.wiki</name>
@@ -409,6 +409,7 @@
 	<scm>
 		<connection>scm:git:ssh://git@github.com/zimmem/mirco-wiki.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/zimmem/mirco-wiki.git</developerConnection>
-	</scm>
+	  <tag>mirco.wiki-1.0.1</tag>
+  </scm>
 
 </project>
