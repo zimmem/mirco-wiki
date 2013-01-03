@@ -307,10 +307,12 @@
 
 			<!-- Upload application to the appspot automatically, during release:perform -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4</version>
 				<configuration>
-					<!--<goals>gae:deploy</goals> -->
-					<goals>test</goals>
+					<goals>gae:deploy</goals>
+					<!-- <goals>test</goals> -->
 				</configuration>
 			</plugin>
 
@@ -383,7 +385,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<mirco.wiki.filter>dev.properties</mirco.wiki.filter>
+				<mirco.wiki.filter>${user.home}/mirco-wiki/dev.properties</mirco.wiki.filter>
 			</properties>
 		</profile>
 
@@ -398,8 +400,7 @@
 			</activation>
 
 			<properties>
-				<!-- During release, set application version in appengine-web.xml to 2 -->
-				<gae.application.version>release</gae.application.version>
+				<mirco.wiki.filter>${user.home}/mirco-wiki/release.properties</mirco.wiki.filter>
 			</properties>
 		</profile>
 	</profiles>
