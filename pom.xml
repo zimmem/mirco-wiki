@@ -406,8 +406,8 @@
 
 
 	<scm>
-		<connection>scm:git:ssh:git@github.com:zimmem/wiki.zimmem.com.git</connection>
-		<developerConnection>scm:git:ssh:git@github.com:zimmem/wiki.zimmem.com.git</developerConnection>
+		<connection>scm:git:ssh://git@github.com:zimmem/mirco-wiki.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:zimmem/mirco-wiki.git</developerConnection>
 	</scm>
 
 </project>
