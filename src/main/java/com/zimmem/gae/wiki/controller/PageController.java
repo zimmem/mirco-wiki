@@ -50,15 +50,7 @@ public class PageController {
         return "/pageForm";
     }
 
-    @RequestMapping(value = "/preview", method = RequestMethod.POST)
-    public String preview(WikiPage wikiPage, Map<String, Object> model) {
-        MarkdownProcessor process = new MarkdownProcessor();
-        wikiPage.setHtml(process.markdown(wikiPage.getWiki()));
-        wikiPage.setCreater(userService.getCurrentUser());
-        wikiPage.setEditor(UserServiceFactory.getUserService().getCurrentUser());
-        model.put("wikiPage", wikiPage);
-        return "/page";
-    }
+   
 
     public void saveWikiPage(WikiPage wikiPage) {
 

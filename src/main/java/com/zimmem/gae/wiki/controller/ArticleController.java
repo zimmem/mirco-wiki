@@ -1,6 +1,7 @@
 package com.zimmem.gae.wiki.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,12 +13,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.petebevin.markdown.MarkdownProcessor;
 import com.zimmem.gae.wiki.model.WikiPage;
 import com.zimmem.gae.wiki.repository.WikiPageRepository;
 
 @Controller
 public class ArticleController {
+
+    private UserService        userService = UserServiceFactory.getUserService();
 
     @Autowired
     private WikiPageRepository wikiPageRepository;
@@ -45,6 +52,16 @@ public class ArticleController {
         model.addAttribute("article", wikiPageRepository.findOne(id));
         List<WikiPage> children = wikiPageRepository.listWikiPagesByParentId(id);
         model.addAttribute("children", children);
+        return "article";
+    }
+
+    @RequestMapping(value = "/preview", method = RequestMethod.POST)
+    public String preview(WikiPage wikiPage, Map<String, Object> model) {
+        MarkdownProcessor process = new MarkdownProcessor();
+        wikiPage.setHtml(process.markdown(wikiPage.getWiki()));
+        wikiPage.setCreater(userService.getCurrentUser());
+        wikiPage.setEditor(UserServiceFactory.getUserService().getCurrentUser());
+        model.put("wikiPage", wikiPage);
         return "article";
     }
 
