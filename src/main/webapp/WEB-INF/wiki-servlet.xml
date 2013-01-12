@@ -11,6 +11,7 @@
 		<property name="removeSemicolonContent" value="false" />
 		<!-- <property name="defaultHandler"> <bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" /> </property> -->
 	</bean>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"></bean>
 
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="cacheSeconds" value="0" />

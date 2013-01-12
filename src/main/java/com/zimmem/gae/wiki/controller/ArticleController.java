@@ -20,6 +20,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.petebevin.markdown.MarkdownProcessor;
 import com.zimmem.gae.wiki.model.WikiPage;
 import com.zimmem.gae.wiki.repository.WikiPageRepository;
+import com.zimmem.springframework.web.exception.ResourceNotFoundException;
 
 @Controller
 public class ArticleController {
@@ -49,7 +50,13 @@ public class ArticleController {
 
     @RequestMapping("/articles/id-{id}")
     public String articleDetail(@PathVariable long id, Model model) {
-        model.addAttribute("article", wikiPageRepository.findOne(id));
+        
+        
+        WikiPage article = wikiPageRepository.findOne(id);
+        if(article == null ){
+            throw new ResourceNotFoundException();
+        }
+        model.addAttribute("article", article);
         List<WikiPage> children = wikiPageRepository.listWikiPagesByParentId(id);
         model.addAttribute("children", children);
         return "article";
@@ -64,5 +71,7 @@ public class ArticleController {
         model.put("wikiPage", wikiPage);
         return "article";
     }
+    
+   
 
 }
