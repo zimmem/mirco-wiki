@@ -315,6 +315,12 @@
 				</dependencies>
 			</plugin>
 
+			<plugin>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
+				<version>1.7.4</version>
+			</plugin>
+
 			<!-- Upload application to the appspot automatically, during release:perform -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -370,7 +376,7 @@
 
 		<!-- Specify AppEngine version for your project. It should match SDK version pointed to by ${gae.home} property (Typically, one used by your Eclipse plug-in) -->
 		<spring.version>3.2.0.RELEASE</spring.version>
-		<gae.version>1.7.3</gae.version>
+		<gae.version>1.7.4</gae.version>
 		<!-- Upload to http://test.latest.<applicationName>.appspot.com by default -->
 		<gae.application.version>${maven.build.timestamp}</gae.application.version>
 		<gae.home>
