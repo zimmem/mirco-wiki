@@ -68,7 +68,7 @@ public class ArticleController {
         wikiPage.setHtml(process.markdown(wikiPage.getWiki()));
         wikiPage.setCreater(userService.getCurrentUser());
         wikiPage.setEditor(UserServiceFactory.getUserService().getCurrentUser());
-        model.put("wikiPage", wikiPage);
+        model.put("article", wikiPage);
         return "article";
     }
     
