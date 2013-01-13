@@ -72,6 +72,15 @@ body {
 	margin-top: 20px;
 }
 
+.article img{
+	max-height: 600px;
+	max-width: 800px;
+	padding: 15px;
+	border: 10px solid #777; 	
+	box-shadow: 5px 5px 13px 0px;
+	border-radius: 10px;
+}
+
 .article p {
 	line-height: 2em;
 	text-indent: 2em;
