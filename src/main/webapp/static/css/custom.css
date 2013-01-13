@@ -25,13 +25,26 @@ body {
 	color: red;
 }
 
+.tool-panel{
+	background-color: #ddd;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	margin-bottom: 20px;
+	box-shadow:0 0px 5px 5px #BBB;
+	position: fixed;
+	left:0;
+	right:0;
+	top:0;
+	z-index: 10000;
+}
+
 #markdown-editor {
-	position: absolute;
-	top: 50px;
-	right: 0px;
-	bottom: 0px;
-	left: 0px;
+	height:600px;
+	width: 960px;
+	margin: 80px auto 0 auto;
 	overflow: hidden;
+	position: relative;
+	box-shadow: 0 0px 20px 5px #CCC;
 }
 
 #wiki-content-preview {

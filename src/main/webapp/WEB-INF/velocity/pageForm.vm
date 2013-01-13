@@ -2,24 +2,21 @@
     <input type="hidden" id="pageId" name="id" value="$!wikiPage.id" />
     <input type="hidden" name="parentId" value="$!wikiPage.parentId" />
     <input type="hidden" id="wiki-val" name="wiki" />
-    <div>
+    <div class="tool-panel">
         <div class="btn-toolbar form-inline">
-         <select id="theme" size="1">
-          #parse("widget/aceThreme.vm")
-        </select>
-        <input type="text" name="title" class="input-xxlarge" value="$!esc.html($!wikiPage.title)" placeholder="title"/>
-        <div class="btn-group">
-             <a id="btn-save" class="btn btn-primary">save</a>
-             <a id="btn-preview" class="btn">preview</a>
-            <a id="btn-atta" class="btn btn-primary">Attachment...</a>
-        </div>
+            <select id="theme" size="1">
+            #parse("widget/aceThreme.vm")
+            </select>
+            <input type="text" name="title" class="input-xxlarge" value="$!esc.html($!wikiPage.title)" placeholder="title"/>
+                <a id="btn-save" class="btn btn-primary">save</a>
+                <a id="btn-preview" class="btn">preview</a>
+                <a id="btn-atta" class="btn btn-primary">Attachment...</a>
         </div>
          <div class="btn-toolbar form-inline">
          </div>
     </div>
-    <div id="edit-form-wrapper" style="margin: 50px; display:none;">
-        <div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
-    </div>
+    <div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
+
 </form>
 
 <script>
