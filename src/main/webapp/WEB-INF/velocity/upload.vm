@@ -1,0 +1,45 @@
+<div id="upload_holder" draggable="true">
+    <ul id="file-list"></ul>
+</div>
+<p>Upload progress: <progress id="uploadprogress" min="0" max="100" value="0">0</progress></p>
+<script>
+    $(function() {
+        var holder = $('#upload_holder');
+        var count = 0;
+        holder.on("dragover", function() {
+            this.className = 'hover';
+            return false;
+        });
+        holder.on('dragend', function() {
+            this.className = '';
+            return false;
+        });
+        holder.on("drop", function(event) {
+            event.preventDefault();
+            event = event.originalEvent;
+            this.className = '';
+            var files = event.dataTransfer.files;
+            for ( var i = 0; i < files.length; i++) {
+                var file = files[i];
+                count ++ ;
+                $('#file-list').append('<li>' + file.name + ' ' + (file.size ? (file.size/1024|0) + 'K' : '') + '<progress id="upload-progress-'+count+'"></progress></li>');
+                formData = new FormData();
+                formData.append('myFile', files[i]);
+                var xhr = new XMLHttpRequest();
+                xhr.upload.progress = xhr.progress =  $('#upload-progress-'+count);
+                xhr.open('POST', '/upload');
+                xhr.onload = function() {
+                    this.progress.val(100).html(100);
+                };
+                xhr.upload.onprogress = function(event) {
+                    if (event.lengthComputable) {
+                        var complete = (event.loaded / event.total * 100 | 0);
+                        this.progress.val(complete).html(complete);
+                    }
+                }
+                xhr.send(formData);
+            }
+
+        });
+    });
+</script>

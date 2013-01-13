@@ -1,0 +1,95 @@
+<div id="atta-mgr" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Attachment Manager</h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            <ul class="nav nav-tabs">
+                <li class="active"><a id="select-tab" href="#select-atta-tab" data-toggle="tab">Select</a>
+                </li>
+                <li><a href="#upload-atta-tab" data-toggle="tab">Upload</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="select-atta-tab" class="tab-pane active">
+                </div>
+                <div id="upload-atta-tab" class="tab-pane">
+                    <ul id="upload-list" class="atta-list">
+                        <li>
+                            <div id="upload_holder" class="span3" draggable="true"></div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+	function loadAttacmentManager(){
+        $('#select-atta-tab').load('/attachments/all');
+        $('#atta-mgr').modal({
+        	keyboard: true
+      	})
+    }
+
+    $(function() {
+        
+        $('.atta-item').live('click', function() {
+            $(this).toggleClass('selected');
+        });
+    });
+
+    $(function() {
+        var holder = $('#upload_holder');
+        var count = 0;
+        holder.on("dragover", function() {
+            $(this).addClass('hover');
+            return false;
+        });
+        holder.on('dragend', function() {
+            $(this).removeClass('hover');
+        });
+        holder.on("drop", function(event) {
+            $(this).removeClass('hover');
+            event.preventDefault();
+            event = event.originalEvent;
+            var files = event.dataTransfer.files;
+            for ( var i = 0; i < files.length; i++) {
+                var file = files[i];
+                count++;
+                var uploadItem = $(
+                        '<li class="atta-item span3" id="upload-item-'+ count +'"><progress id="upload-progress-'+count+'"></progress><span>'
+                                + file.name
+                                + ' '
+                                + (file.size ? (file.size / 1024 | 0) + 'K'
+                                        : '') + '</span></li>');
+                $('#upload-list').prepend(uploadItem);
+                formData = new FormData();
+                formData.append('myFile', files[i]);
+                var xhr = new XMLHttpRequest();
+                xhr.progress = xhr.upload.progress = $('#upload-progress-'+ count);
+                xhr.item = $('#upload-item-'+ count);
+                xhr.open('POST', '/upload');
+                xhr.onload = function(e , i , j) {
+                    var obj = eval('(' +e.target.responseText+ ')');
+                    console.info(obj);
+                    var thumbnail = $('<a href="javascript:void(0)" class="thumbnail"> <img src="/file/' + obj.name+ '" alt=""> </a>');
+                    this.progress.replaceWith(thumbnail);
+                    
+                };
+                xhr.upload.onprogress = function(event) {
+                    if (event.lengthComputable) {
+                        var complete = (event.loaded / event.total * 100 | 0);
+                        this.progress.val(complete).html(complete);
+                    }
+                }
+                xhr.send(formData);
+            }
+
+        });
+    });
+</script>

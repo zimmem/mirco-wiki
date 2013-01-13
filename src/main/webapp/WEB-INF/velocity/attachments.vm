@@ -1,0 +1,11 @@
+#set($layout="layout/empty.vm")
+<ul class="atta-list">
+    #foreach($attachment in $attachmentList)
+    <li class="span3 atta-item">
+        <a href="javasciprt:void(0)" class="thumbnail"> 
+            <img src="/file/$!{attachment.name}" alt="">
+        </a> 
+        <span>$!{attachment.name}</span>
+    </li>
+    #end
+</ul>
