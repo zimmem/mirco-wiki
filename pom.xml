@@ -392,6 +392,9 @@
 			${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}
 		</gae.home>
 		<datanucleus.version>1.1.5</datanucleus.version>
+		
+		<!-- do not user https when upload to gae -->
+		<insecure>true</insecure>
 	</properties>
 
 	<profiles>

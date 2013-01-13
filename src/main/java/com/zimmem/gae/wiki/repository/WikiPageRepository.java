@@ -19,4 +19,7 @@ public interface WikiPageRepository extends PagingAndSortingRepository<WikiPage,
 
     @Query("select w from WikiPage w where w.parentId = ?1")
     List<WikiPage> listWikiPagesByParentId(long parentId);
+    
+    @Query("select w from WikiPage w where ?1 MEMBER OF w.tags ")
+    List<WikiPage> listWikiPagesByTag(String tag);
 }

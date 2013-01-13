@@ -2,6 +2,7 @@ package com.zimmem.gae.wiki.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.users.User;
@@ -42,6 +44,8 @@ public class WikiPage implements Serializable {
 
     @Basic
     private Text              htmlText;
+
+    private Set<String>       tags;
 
     //
     // @OneToMany(mappedBy = "wikiPage", cascade = CascadeType.ALL)
@@ -104,6 +108,7 @@ public class WikiPage implements Serializable {
         this.parentId = parentId;
     }
 
+    @JsonIgnore
     public Text getWikiText() {
         return wikiText;
     }
@@ -120,6 +125,7 @@ public class WikiPage implements Serializable {
         wikiText = wiki == null ? null : new Text(wiki);
     }
 
+    @JsonIgnore
     public Text getHtmlText() {
         return htmlText;
     }
@@ -162,6 +168,14 @@ public class WikiPage implements Serializable {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
+    }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
     }
 
 }

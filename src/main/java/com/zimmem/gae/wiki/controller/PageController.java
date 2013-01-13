@@ -2,7 +2,9 @@ package com.zimmem.gae.wiki.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,7 +52,15 @@ public class PageController {
         return "/pageForm";
     }
 
-   
+    @RequestMapping("/fix")
+    @ResponseBody
+    public WikiPage fix(@RequestParam long id, @RequestParam String tags) {
+        WikiPage page = wikiPageRepository.findOne(id);
+        page.getTags().add(tags);
+        wikiPageRepository.save(page);
+        page = wikiPageRepository.findOne(id);
+        return page;
+    }
 
     public void saveWikiPage(WikiPage wikiPage) {
 

@@ -1,5 +1,12 @@
 package com.zimmem.gae.wiki.dao;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import static org.junit.Assert.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.zimmem.gae.wiki.model.WikiPage;
 import com.zimmem.gae.wiki.repository.WikiPageRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -36,4 +44,21 @@ public class WikiPageRepositoryTest {
         System.out.println(wikiPageRepository.count());
     }
 
+    @Test
+    public void testTagIds() {
+        WikiPage page = new WikiPage();
+        Set<Long> set = new HashSet<Long>();
+        set.add(1L);
+        set.add(2L);
+        Set<String> strset = new LinkedHashSet<String>();
+        strset.add("abc");
+        strset.add("cde");
+        page.setTags(strset);
+        page = wikiPageRepository.save(page);
+        page = wikiPageRepository.findOne(page.getId());
+        assertEquals(2, page.getTags().size());
+        System.out.println(page.getTags());
+        List<WikiPage> listWikiPagesByTag = wikiPageRepository.listWikiPagesByTag("abc");
+        assertFalse(listWikiPagesByTag.isEmpty());
+    }
 }
