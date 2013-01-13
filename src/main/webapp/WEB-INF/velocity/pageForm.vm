@@ -10,7 +10,13 @@
             <input type="text" name="title" class="input-xxlarge" value="$!esc.html($!wikiPage.title)" placeholder="title"/>
                 <a id="btn-save" class="btn btn-primary">save</a>
                 <a id="btn-preview" class="btn">preview</a>
-                <a id="btn-atta" class="btn btn-primary">Attachment...</a>
+                <a id="btn-atta" class="btn">Attachment...</a>
+                #if($wikiPage.id)
+                <a id="btn-goto-page" class="btn" href="/articles/id-$!{wikiPage.id}">Go to Page</a>
+                #else
+                <a id="btn-goto-page" class="btn disabled">Go to Page</a>
+                #end
+                
         </div>
          <div class="btn-toolbar form-inline">
          </div>
@@ -18,7 +24,11 @@
     <div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
 
 </form>
-
+<div id="save-modal" class="modal hide fade">
+    <div id="save-modal-content" class="modal-body">
+        
+    </div>
+</div>
 <script>
 $(function(){
     var editor = ace.edit("markdown-editor");
@@ -31,10 +41,15 @@ $(function(){
     });
     
     function saveWiki(){
+        $('#save-modal-content').html("loading");
+        $('#save-modal').modal('show');
         $('#wiki-val').val(editor.getValue());
         $.post("/post_page", $('#markdown-form').serialize(), function(data){
         	if(data.id != undefined && data.id != undefined > 0){
         	   $('#pageId').val(data.id);
+        	   $('#save-modal-content').html('<div id="success" class="alert alert-success">Save success! will close modal in 3 seconds.</div>');
+        	   setTimeout("$('#save-modal').modal('hide')",3000);
+        	   $('#btn-goto-page').attr('href', '/articles/id-'+data.id).removeClass('disabled');
         	}
         }, 'json');
     }
