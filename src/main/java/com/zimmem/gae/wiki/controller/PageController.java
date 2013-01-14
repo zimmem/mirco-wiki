@@ -85,6 +85,7 @@ public class PageController {
         old.setHtml(theNew.getHtml());
         old.setVersion(old.getVersion() == null ? 2 : old.getVersion() + 1);
         old.setModifiedTime(new Date());
+        old.setTags(theNew.getTags());
         wikiPageRepository.save(old);
 
     }
