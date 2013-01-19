@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,11 +31,15 @@ import com.zimmem.gae.wiki.repository.WikiPageRepository;
 @Controller
 public class SearchController {
 
-    @Autowired
-    private WikiPageRepository wikiPageRepository;
+    private static final String INCREMENT_BUILD_LASTTIME = "increment.build.lasttime";
+
+    private static final Logger log                      = Logger.getLogger(SearchController.class);
 
     @Autowired
-    private AppVarRepository   appVarRepository;
+    private WikiPageRepository  wikiPageRepository;
+
+    @Autowired
+    private AppVarRepository    appVarRepository;
 
     @RequestMapping("/_search/fullBuild")
     @ResponseBody
@@ -46,31 +51,21 @@ public class SearchController {
         return "success";
     }
 
-    private void buildPageToIndex(WikiPage wikiPage) {
-        Builder builder = Document.newBuilder().setId("article_" + wikiPage.getId());
-        builder.addField(Field.newBuilder().setName("id").setNumber(wikiPage.getId()));
-        builder.addField(Field.newBuilder().setName("title").setText(wikiPage.getTitle()));
-        builder.addField(Field.newBuilder().setName("creator").setText(wikiPage.getCreater().getNickname()));
-        builder.addField(Field.newBuilder().setName("editor").setText(wikiPage.getEditor().getNickname()));
-        builder.addField(Field.newBuilder().setName("modify_date").setDate(wikiPage.getModifiedTime()));
-        builder.addField(Field.newBuilder().setName("content").setHTML(wikiPage.getHtml()));
-        Document document = builder.build();
-        getIndex().put(document);
-    }
-
     @RequestMapping("/_search/incrementBuild")
+    @ResponseBody
     public String incrementBuild() {
         Date now = new Date();
-        AppVar var = appVarRepository.findOne("increment.build.lasttime");
+        AppVar var = appVarRepository.findOne(INCREMENT_BUILD_LASTTIME);
         String lasttime = var == null ? "0" : var.getValue();
         List<WikiPage> pages = wikiPageRepository.listLastModifyPages(new Date(Long.parseLong(lasttime)));
         if (pages != null && !pages.isEmpty()) {
             for (WikiPage wikiPage : pages) {
                 buildPageToIndex(wikiPage);
             }
-            var.setValue(String.valueOf(now.getTime()));
-            appVarRepository.save(var);
+            log.info("build " + pages.size() + " articles into document index. ");
+            updateLastBuildTime(now, var);
         }
+
         return "success";
     }
 
@@ -106,4 +101,24 @@ public class SearchController {
 
     }
 
+    private void buildPageToIndex(WikiPage wikiPage) {
+        Builder builder = Document.newBuilder().setId("article_" + wikiPage.getId());
+        builder.addField(Field.newBuilder().setName("id").setNumber(wikiPage.getId()));
+        builder.addField(Field.newBuilder().setName("title").setText(wikiPage.getTitle()));
+        builder.addField(Field.newBuilder().setName("creator").setText(wikiPage.getCreater().getNickname()));
+        builder.addField(Field.newBuilder().setName("editor").setText(wikiPage.getEditor().getNickname()));
+        builder.addField(Field.newBuilder().setName("modify_date").setDate(wikiPage.getModifiedTime()));
+        builder.addField(Field.newBuilder().setName("content").setHTML(wikiPage.getHtml()));
+        Document document = builder.build();
+        getIndex().put(document);
+    }
+
+    private void updateLastBuildTime(Date now, AppVar var) {
+        if (var == null) {
+            var = new AppVar(INCREMENT_BUILD_LASTTIME, String.valueOf(now.getTime()));
+        } else {
+            var.setValue(String.valueOf(now.getTime()));
+        }
+        appVarRepository.save(var);
+    }
 }

@@ -7,7 +7,6 @@
     <input type="hidden" name="tags" value="$tag"/>
     #end
     <input type="hidden" name="tags" value="test"/>
-    <input type="hidden" name="tags" value="tes,t2"/>
     <div class="tool-panel">
         <div class="btn-toolbar form-inline">
             <select id="theme" size="1">

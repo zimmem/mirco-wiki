@@ -1,12 +1,14 @@
+#if($pages && $pages.size() > 0 )
 <ul>
-#if($pages)
-#foreach($page in $pages)
-<h4><a href="/page?id=${page.id}">${page.title}</a></h4>
-<div class="search-snipeet">
-    $!{page.wiki}
-</div>
-#end
+    #foreach($page in $pages)
+    <li>
+        <h4><a href="/page?id=${page.id}">${page.title}</a></h4>
+        <div class="search-snipeet">
+            $!{page.wiki}
+        </div>
+    </li>
+    #end
+</ul>
 #else
 <h3>根据相关法律法规， “$q”的搜索结果未予显示</h3>
 #end
-</ul>
