@@ -2,10 +2,6 @@
     <input type="hidden" id="pageId" name="id" value="$!wikiPage.id" />
     <input type="hidden" name="parentId" value="$!wikiPage.parentId" />
     <input type="hidden" id="wiki-val" name="wiki" />
-    <!--  $wikiPage.tags.class $wikiPage.tags -->
-    #foreach($tag in $wikiPage.tags)
-    <input type="hidden" name="tags" value="$tag"/>
-    #end
     <input type="hidden" name="tags" value="test"/>
     <div class="tool-panel">
         <div class="btn-toolbar form-inline">
@@ -110,15 +106,19 @@ $('#tag-input').blur(function() {
 });
 
 $('#tag-input').keypress(function(e) {
+    console.info(e.keyCode);
    if(e.keyCode == 13){
-       $li = $('<li class="tag"><input type="hidden" name="tags" value="'+ $(this).val()+'"/><span>' +$(this).val()+ '</span><i class="remove-tag icon-remove" ></i></li>');
-       $('#tags').append($li);
+       if($(this).val() != ""){
+           $li = $('<li class="tag"><input type="hidden" name="tags" value="'+ $(this).val()+'"/><span>' +$(this).val()+ '</span><i class="remove-tag icon-remove" ></i></li>');
+       	   $('#tags').append($li);
+       }
        $(this).val('');
    };
 });
 
-$('.remove-tag').click(function(){
+$('.remove-tag').live('click',function(){
     $(this).parent().remove();
+    return false;
 });
 </script>
 
