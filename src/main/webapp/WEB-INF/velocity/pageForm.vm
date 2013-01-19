@@ -21,10 +21,21 @@
                 #else
                 <a id="btn-goto-page" class="btn disabled">Go to Page</a>
                 #end
-                
         </div>
-         <div class="btn-toolbar form-inline">
-         </div>
+        <div class="form-inline">
+            <div id="tags-input-wrapper" class="tags-input-wrapper">
+            <span>Tags:</span>
+            <ul id="tags" class="tags">
+             #foreach($tag in $wikiPage.tags)
+             <li class="tag">
+                <input type="hidden" name="tags" value="$!{tag}"/>
+                <span>$!{tag}</span><i class="remove-tag icon-remove" ></i>
+              </li>
+             #end
+            </ul>
+            <input type="text" class="span2 hide" id="tag-input"></input>
+            </div>
+        </div>
     </div>
     <div id="markdown-editor"/>$!esc.html($!wikiPage.wiki)</div>
 
@@ -84,6 +95,30 @@ $(function(){
     $('#btn-atta').click(function(){
         loadAttacmentManager();
     });
+});
+
+
+$('#tags-input-wrapper').click(function(){
+    if(!$('#tag-input').is(":visible")){
+	    $('#tag-input').show();
+    }
+    $('#tag-input').focus();
+});
+
+$('#tag-input').blur(function() {
+    $(this).hide();
+});
+
+$('#tag-input').keypress(function(e) {
+   if(e.keyCode == 13){
+       $li = $('<li class="tag"><input type="hidden" name="tags" value="'+ $(this).val()+'"/><span>' +$(this).val()+ '</span><i class="remove-tag icon-remove" ></i></li>');
+       $('#tags').append($li);
+       $(this).val('');
+   };
+});
+
+$('.remove-tag').click(function(){
+    $(this).parent().remove();
 });
 </script>
 

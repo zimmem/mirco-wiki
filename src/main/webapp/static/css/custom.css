@@ -8,7 +8,7 @@
 	margin-rigth: 10px;
 }
 
-.thumbnail > img{
+.thumbnail>img {
 	height: 150px;
 }
 /**bootstrap custom end*/
@@ -25,26 +25,57 @@ body {
 	color: red;
 }
 
-.tool-panel{
+.tool-panel {
 	background-color: #ddd;
 	border-bottom: 1px solid #ccc;
 	border-top: 1px solid #ccc;
 	margin-bottom: 20px;
-	box-shadow:0 0px 5px 5px #BBB;
+	box-shadow: 0 0px 5px 5px #BBB;
 	position: fixed;
-	left:0;
-	right:0;
-	top:0;
+	left: 0;
+	right: 0;
+	top: 0;
 	z-index: 999;
 }
 
 #markdown-editor {
-	height:600px;
-	width: 960px;
-	margin: 80px auto 0 auto;
+	margin: auto;
 	overflow: hidden;
-	position: relative;
+	position: absolute;
 	box-shadow: 0 0px 20px 5px #CCC;
+	top: 110px;
+	bottom: 20px;
+	right: 50px;
+	left: 50px;
+	min-width: 800px;
+	max-width: 960px;
+}
+
+.tags-input-wrapper {
+	margin: 5px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	box-shadow: 0 0 2px 2px #ccc;
+}
+
+.tags-input-wrapper>.tags {
+	display: inline;
+	padding-left: 10px;
+	margin: 0px;
+}
+
+.tags-input-wrapper>.tags>li {
+	display: inline;
+	font-size: 14px;
+	padding: 2px 5px 2px 5px;
+	background-color: #3a87ad;
+	color: #fff;
+	font-weight: bold;
+	margin: 2px;
+}
+
+.tags-input-wrapper>.tags>li>i {
+	cursor: pointer;
 }
 
 #wiki-content-preview {
@@ -72,11 +103,11 @@ body {
 	margin-top: 20px;
 }
 
-.article img{
+.article img {
 	max-height: 600px;
 	max-width: 800px;
 	padding: 15px;
-	border: 10px solid #777; 	
+	border: 10px solid #777;
 	box-shadow: 5px 5px 13px 0px;
 	border-radius: 10px;
 }
@@ -137,40 +168,39 @@ body {
 
 #upload_holder {
 	border: 3px dashed #ccc;
-	height: 200px;	
+	height: 200px;
 }
 
 #upload_holder.hover {
 	border: 3px dashed #0c0;
 }
 
-#atta-mgr{
+#atta-mgr {
 	width: 960px;
 	margin-left: -480px;
 }
 
-.atta-list{
+.atta-list {
 	margin: auto;
 }
 
-.atta-list li{
+.atta-list li {
 	list-style: none;
 	position: relative;
 	margin-top: 15px;
 	border: 1px solid white;
-	height: 200px;	
+	height: 200px;
 }
 
-.atta-item{
+.atta-item {
 	
 }
 
-.atta-item.selected{
+.atta-item.selected {
 	border: 1px solid green;
-	
 }
 
-.selected::after{
+.selected::after {
 	content: "selected";
 	position: absolute;
 	top: -1px;
