@@ -1,40 +1,20 @@
 package com.zimmem.gae.wiki.dao;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.*;
-
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
-import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.zimmem.gae.wiki.model.WikiPage;
 import com.zimmem.gae.wiki.repository.WikiPageRepository;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:wiki-dal.xml" })
-public class WikiPageRepositoryTest {
-
-    private final LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
-
-    @Before
-    public void setUp() throws Exception {
-        helper.setUp();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        helper.tearDown();
-    }
+public class WikiPageRepositoryTest extends RepositoryTestBase {
 
     @Autowired
     WikiPageRepository wikiPageRepository;

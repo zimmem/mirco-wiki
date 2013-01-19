@@ -15,7 +15,6 @@ public class ErrorController {
     private static Logger log = Logger.getLogger(ErrorController.class);
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ModelAndView notFound(Exception e) {
         return new ModelAndView("error");
     }

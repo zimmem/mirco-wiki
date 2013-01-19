@@ -1,5 +1,6 @@
 package com.zimmem.gae.wiki.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -22,4 +23,7 @@ public interface WikiPageRepository extends PagingAndSortingRepository<WikiPage,
     
     @Query("select w from WikiPage w where ?1 MEMBER OF w.tags ")
     List<WikiPage> listWikiPagesByTag(String tag);
+
+    @Query("select w from WikiPage w where w.modifiedTime > ?1")
+    List<WikiPage> listLastModifyPages(Date date);
 }

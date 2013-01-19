@@ -1,6 +1,7 @@
 package com.zimmem.gae.wiki.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,9 @@ import com.google.appengine.api.search.QueryOptions;
 import com.google.appengine.api.search.Results;
 import com.google.appengine.api.search.ScoredDocument;
 import com.google.appengine.api.search.SearchServiceFactory;
+import com.zimmem.gae.wiki.model.AppVar;
 import com.zimmem.gae.wiki.model.WikiPage;
+import com.zimmem.gae.wiki.repository.AppVarRepository;
 import com.zimmem.gae.wiki.repository.WikiPageRepository;
 
 @Controller
@@ -30,29 +33,49 @@ public class SearchController {
     @Autowired
     private WikiPageRepository wikiPageRepository;
 
+    @Autowired
+    private AppVarRepository   appVarRepository;
+
     @RequestMapping("/_search/fullBuild")
     @ResponseBody
     public String fullBuild() {
         List<WikiPage> allPage = wikiPageRepository.listRootWikiPages();
         for (WikiPage wikiPage : allPage) {
-            Builder builder = Document.newBuilder().setId("article_" + wikiPage.getId());
-            builder.addField(Field.newBuilder().setName("id").setNumber(wikiPage.getId()));
-            builder.addField(Field.newBuilder().setName("title").setText(wikiPage.getTitle()));
-            builder.addField(Field.newBuilder().setName("creator").setText(wikiPage.getCreater().getNickname()));
-            builder.addField(Field.newBuilder().setName("editor").setText(wikiPage.getEditor().getNickname()));
-            builder.addField(Field.newBuilder().setName("modify_date").setDate(wikiPage.getModifiedTime()));
-            builder.addField(Field.newBuilder().setName("content").setHTML(wikiPage.getHtml()));
-            Document document = builder.build();
-            getIndex().put(document);
+            buildPageToIndex(wikiPage);
+        }
+        return "success";
+    }
+
+    private void buildPageToIndex(WikiPage wikiPage) {
+        Builder builder = Document.newBuilder().setId("article_" + wikiPage.getId());
+        builder.addField(Field.newBuilder().setName("id").setNumber(wikiPage.getId()));
+        builder.addField(Field.newBuilder().setName("title").setText(wikiPage.getTitle()));
+        builder.addField(Field.newBuilder().setName("creator").setText(wikiPage.getCreater().getNickname()));
+        builder.addField(Field.newBuilder().setName("editor").setText(wikiPage.getEditor().getNickname()));
+        builder.addField(Field.newBuilder().setName("modify_date").setDate(wikiPage.getModifiedTime()));
+        builder.addField(Field.newBuilder().setName("content").setHTML(wikiPage.getHtml()));
+        Document document = builder.build();
+        getIndex().put(document);
+    }
+
+    @RequestMapping("/_search/incrementBuild")
+    public String incrementBuild() {
+        Date now = new Date();
+        AppVar var = appVarRepository.findOne("increment.build.lasttime");
+        String lasttime = var == null ? "0" : var.getValue();
+        List<WikiPage> pages = wikiPageRepository.listLastModifyPages(new Date(Long.parseLong(lasttime)));
+        if (pages != null && !pages.isEmpty()) {
+            for (WikiPage wikiPage : pages) {
+                buildPageToIndex(wikiPage);
+            }
+            var.setValue(String.valueOf(now.getTime()));
+            appVarRepository.save(var);
         }
         return "success";
     }
 
     @RequestMapping("/search")
     public Map<String, Object> search(@RequestParam("q") String qstr) {
-        // FieldExpression expression = FieldExpression.newBuilder().setName("snippet").setExpression("snippet(\""
-        // + qstr
-        // + "\",content,10,4)").build();
         QueryOptions options = QueryOptions.newBuilder().setFieldsToSnippet("content").build();
         Query query = Query.newBuilder().setOptions(options).build(qstr);
         Results<ScoredDocument> documents = getIndex().search(query);

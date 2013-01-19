@@ -60,7 +60,7 @@
 			<url-pattern>/create_page</url-pattern>
 			<url-pattern>/edit_page</url-pattern>
 			<url-pattern>/upload</url-pattern>
-			<url-pattern>/_search/fullBuild</url-pattern>
+			<url-pattern>/_search/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>admin</role-name>
