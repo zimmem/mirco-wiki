@@ -2,7 +2,6 @@
     <input type="hidden" id="pageId" name="id" value="$!wikiPage.id" />
     <input type="hidden" name="parentId" value="$!wikiPage.parentId" />
     <input type="hidden" id="wiki-val" name="wiki" />
-    <input type="hidden" name="tags" value="test"/>
     <div class="tool-panel">
         <div class="btn-toolbar form-inline">
             <select id="theme" size="1">
