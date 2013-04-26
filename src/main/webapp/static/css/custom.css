@@ -14,12 +14,14 @@
 /**bootstrap custom end*/
 body {
 	background: #FFF;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 #main {
 	padding-top: 50px;
 	margin-top: 15px;
-	margin-left: 15px;
+	margin-bottom: 15px;
 }
 
 .search-snipeet b {
@@ -90,6 +92,7 @@ body {
 
 .article-list {
 	margin-left: 0px;
+	padding: 5px;
 }
 
 .article-list li {
