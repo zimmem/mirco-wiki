@@ -10,9 +10,14 @@ $metas.add("keywords",$!{article.title})
     	$!{article.html}
     </div>
 </article>
-#if($children && $children.size()>0)
-#parse("widget/childrenSection.vm")
-#end
+##if($children && $children.size()>0)
+##parse("widget/childrenSection.vm")
+##end
+
+<hr/>
+
+#parse("widget/disqus.vm")
+
 <script>
 mirco_wiki.prettyCode();
 </script>
