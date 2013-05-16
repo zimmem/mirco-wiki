@@ -329,7 +329,7 @@
 			<plugin>
 				<groupId>com.google.appengine</groupId>
 				<artifactId>appengine-maven-plugin</artifactId>
-				<version>1.7.7</version>
+				<version>${gae.version}</version>
 				<configuration>
 					<address>0.0.0.0</address>
 				</configuration>

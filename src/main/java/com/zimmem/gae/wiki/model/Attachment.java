@@ -10,6 +10,8 @@ import javax.persistence.Id;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.google.appengine.api.datastore.Text;
+
 @Entity
 public class Attachment implements Serializable {
 
@@ -23,11 +25,11 @@ public class Attachment implements Serializable {
 
     private Date              crateTime;
 
-    private String            gfsPath;
+    private Text              gfsPath;
 
     private String            blobKey;
 
-    private String            gfsName;
+    private Text            gfsName;
 
     private String            name;
 
@@ -44,11 +46,11 @@ public class Attachment implements Serializable {
     }
 
     public String getGfsPath() {
-        return gfsPath;
+        return gfsPath == null ? null : gfsPath.getValue() ;
     }
 
     public void setGfsPath(String gfsPath) {
-        this.gfsPath = gfsPath;
+        this.gfsPath = gfsPath == null ? null : new Text(gfsPath);
     }
 
     public String getBlobKey() {
@@ -60,11 +62,11 @@ public class Attachment implements Serializable {
     }
 
     public String getGfsName() {
-        return gfsName;
+        return gfsName == null ? null : gfsName.getValue();
     }
 
     public void setGfsName(String gfsName) {
-        this.gfsName = gfsName;
+        this.gfsName = gfsName == null ? null : new Text(gfsName);
     }
 
     public String getName() {

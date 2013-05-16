@@ -23,6 +23,8 @@ public class ErrorController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ModelAndView error(Throwable e) {
         log.error(e.getMessage(), e);
-        return new ModelAndView("error");
+        ModelAndView mvc = new ModelAndView("error");
+        mvc.addObject("e",e);
+        return  mvc;
     }
 }
