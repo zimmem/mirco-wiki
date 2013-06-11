@@ -389,8 +389,8 @@
 		<downloadSources>true</downloadSources>
 
 		<!-- Specify AppEngine version for your project. It should match SDK version pointed to by ${gae.home} property (Typically, one used by your Eclipse plug-in) -->
-		<spring.version>3.2.0.RELEASE</spring.version>
-		<gae.version>1.7.7</gae.version>
+		<spring.version>3.2.3.RELEASE</spring.version>
+		<gae.version>1.8.0</gae.version>
 		<!-- Upload to http://test.latest.<applicationName>.appspot.com by default -->
 		<gae.application.version>${maven.build.timestamp}</gae.application.version>
 		<gae.home>

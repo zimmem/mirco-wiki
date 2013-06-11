@@ -74,8 +74,8 @@ public class BlobController {
         }
         attachment.setName(name);
         attachment.setCrateTime(new Date());
-        attachment = attachmentRepository.save(attachment);
         attachment.setSize((long) bytes.length);
+        attachment = attachmentRepository.save(attachment);
         return attachment;
 
     }
