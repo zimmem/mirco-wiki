@@ -129,6 +129,12 @@ body {
 	text-indent: 0;
 }
 
+.article h2 {
+	border-bottom: 1px solid #AAA;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+
 .recently-edit {
 	border: 1px solid #EEE;
 	border-radius: 5px;
