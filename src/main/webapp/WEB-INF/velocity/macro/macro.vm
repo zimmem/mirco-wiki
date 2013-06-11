@@ -1,0 +1,22 @@
+#macro(importJavascript $script)
+$srTool.importJavascript($script)
+#end
+
+#macro(importCss $css)
+$srTool.importCss($css)
+#end
+
+#macro(printJavascript)
+#if($srTool.javascriptFiles)
+#foreach($f in $srTool.javascriptFiles)
+<script src="$f"></script>
+#end
+#end
+#end
+#macro(printCss)
+#if($srTool.cssFiles)
+#foreach($css in $srTool.cssFiles)
+<link href="$css" rel="stylesheet">
+#end
+#end
+#end

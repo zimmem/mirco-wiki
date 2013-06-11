@@ -1,6 +1,10 @@
 $metas.add("author",$!{article.editor.nickname})
 $metas.add("keywords",$!{article.title})
 #set($title=$esc.html($!{article.title}))
+
+#importCss("/static/google-code-prettify/prettify.css")
+#importJavascript("/static/google-code-prettify/prettify.js")
+#importJavascript("/static/js/article-view.js")
 <article class="article">
     <header class="page-header">
       <h1>$esc.html($!{article.title}) </h1>
@@ -13,14 +17,8 @@ $metas.add("keywords",$!{article.title})
 ##if($children && $children.size()>0)
 ##parse("widget/childrenSection.vm")
 ##end
-
 <hr/>
-
 #parse("widget/disqus.vm")
-
-<script>
-mirco_wiki.prettyCode();
-</script>
 
 <!-- Place this render call where appropriate -->
     <script type="text/javascript">

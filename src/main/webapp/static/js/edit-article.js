@@ -1,13 +1,6 @@
-var mirco_wiki = {
-
-    prettyCode : function() {
-        $(function() {
-            $('pre').addClass('prettyprint').addClass('linenums');
-            prettyPrint();
-        });
-    },
-
+mirco_wiki.EditArticle = {
     postPage : function() {
+
         // $('#wiki-tab').tabs();
         $('#preview-tab').click(function() {
             jQuery.post('/api-wiki/render', {
@@ -23,11 +16,4 @@ var mirco_wiki = {
             $('#wiki-edit').show();
         });
     },
-
-    diff : function() {
-        $('#diff').html(
-                diffString('$!esc.javascript($preRevision.wiki)',
-                        '$!esc.javascript($afterRevision.wiki)').replace(
-                        /\r\n/gm, '<br />').replace(/\r/gm, '<br />'));
-    }
 }

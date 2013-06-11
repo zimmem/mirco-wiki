@@ -394,7 +394,7 @@
 		<!-- Upload to http://test.latest.<applicationName>.appspot.com by default -->
 		<gae.application.version>${maven.build.timestamp}</gae.application.version>
 		<gae.home>
-			${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}
+			${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk
 		</gae.home>
 		<datanucleus.version>1.1.5</datanucleus.version>
 
