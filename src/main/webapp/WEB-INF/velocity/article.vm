@@ -8,7 +8,7 @@ $metas.add("keywords",$!{article.title})
 <article class="article">
     <header class="page-header">
       <h1>$esc.html($!{article.title}) </h1>
-      <small>Added By $!{article.creater.nickname}, last edited by $!{article.editor.nickname} on $!{article.modifiedTime}</small>
+      <small>Added By <a href="$!metadata.getSysProp("author.profile.url")">$!{article.creater.nickname}</a>, last edited by <a href="$!metadata.getSysProp("author.profile.url")">$!{article.editor.nickname}</a> on $!{article.modifiedTime}</small>
     </header>
     <div class="wiki-content">
     	$!{article.html}

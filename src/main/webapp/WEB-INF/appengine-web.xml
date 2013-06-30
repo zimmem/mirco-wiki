@@ -9,6 +9,7 @@
 		<property name="velocity.dateformat.default" value="${velocity.dateformat.default}" />
 		<property name="build.version" value="${project.build.finalName}" />
 		<property name="build.time" value="${gae.application.version}" />
+		<property name="author.profile.url" value="${author.profile.url}" />
 	</system-properties>
 
 	<sessions-enabled>true</sessions-enabled>
