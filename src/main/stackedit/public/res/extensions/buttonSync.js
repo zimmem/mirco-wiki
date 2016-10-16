@@ -24,15 +24,15 @@ define([
         newConfig.syncPeriod = utils.getInputIntValue("#input-sync-period", event, 0);
         newConfig.syncShortcut = utils.getInputTextValue("#input-sync-shortcut", event);
     };
-    
+
     var fileMgr;
     buttonSync.onFileMgrCreated = function(f) {
         fileMgr = f;
     };
-    
-    var noteMgr;
-    buttonSync.onNoteMgrCreated = function(n) {
-    	noteMgr = n;
+
+    var wikiMgr;
+    buttonSync.onWikiMgrCreated = function(w) {
+		wikiMgr = w;
     };
 
     var $button;
@@ -51,7 +51,7 @@ define([
         }
     };
 
- 
+
     buttonSync.onCreateButton = function() {
         var button = crel('a', {
             class: 'btn btn-success button-synchronize',
@@ -92,9 +92,9 @@ define([
         	postNote();
         });
     };
-    
+
     function postNote(){
-    	noteMgr.postNote(fileMgr.currentFile, function(error){
+		wikiMgr.post(fileMgr.currentFile, function(error){
     		if(!error){
     			console.info("post note success");
     		}

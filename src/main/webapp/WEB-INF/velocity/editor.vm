@@ -19,6 +19,7 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="msvalidate.01" content="5E47EE6F67B069C17E3CDD418351A612">
         <script>
+            window.wiki = {id : $id};
             // Use ?debug to serve original JavaScript files instead of minified
             window.baseDir = 'res';
             if (!/(\?|&)debug($|&)/.test(location.search)) {

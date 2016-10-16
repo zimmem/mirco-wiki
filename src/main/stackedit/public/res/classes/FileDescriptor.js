@@ -7,24 +7,24 @@ define([
 ], function(_, utils, storage, DBRunner, logger) {
 
 	function FileDescriptor(fileIndex) {
-		
-		
+
+
 		this.note = {
 			key : fileIndex
 		};
-		
+
 		Object.defineProperty(this, 'fileIndex', {
 			get: function() {
 				return this.note.key;
 			}
 		});
-		
+
 		Object.defineProperty(this, 'key', {
 			get: function() {
 				return this.note.key;
 			},
 		});
-		
+
 		Object.defineProperty(this, 'guid', {
 			get: function() {
 				return this.note.guid;
@@ -33,7 +33,16 @@ define([
 				this.update({guid:guid});
 			}
 		});
-		
+
+		Object.defineProperty(this, 'id', {
+			get: function() {
+				return this.note.id;
+			},
+			set: function(id) {
+				this.update({id:id});
+			}
+		});
+
 		Object.defineProperty(this, 'title', {
 			get: function() {
 				return this.note.title;
@@ -90,7 +99,7 @@ define([
 				this.update({selectTime:selectTime});
 			}
 		});
-		
+
 		Object.defineProperty(this, 'localEdite', {
 			get: function() {
 				return this.note.localEdite;
@@ -99,7 +108,7 @@ define([
 				this.update({localEdite:localEdite});
 			}
 		});
-		
+
 	}
 
 	FileDescriptor.prototype.update = function(target, callback){
@@ -109,9 +118,9 @@ define([
 			delete this.note.content;
 		}
 		this.store(callback);
-		
+
 	};
-	
+
 	FileDescriptor.prototype.store = function(callback){
 		var that = this;
 		DBRunner.run(function(db){
@@ -124,6 +133,6 @@ define([
 			};
 		});
 	};
-	
+
 	return FileDescriptor;
 });

@@ -184,10 +184,10 @@ define([
 	addEventHook("onFileClosed");
 	addEventHook("onContentChanged");
 	addEventHook("onTitleChanged");
-	
+
 	// Operations on filesSystem
 	addEventHook("onFileSystemCreated");
-	
+
 
 	// Operations on folders
 	addEventHook("onFoldersChanged");
@@ -218,15 +218,15 @@ define([
 
 	// Refresh twitter buttons
 	addEventHook("onTweet");
-	
+
 	// note operations
-	addEventHook("onNoteMgrCreated");
+	addEventHook("onWikiMgrCreated");
 	addEventHook("onNotesRefresh");
-	
-	
+
+
 	addEventHook("onPreviewThemeInited");
 	addEventHook("onPreviewThemeCreated");
-	
+
 
 	var onPreviewFinished = createEventHook("onPreviewFinished");
 	var onAsyncPreviewListenerList = getExtensionListenerList("onAsyncPreview");

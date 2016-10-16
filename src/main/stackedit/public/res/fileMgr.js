@@ -7,12 +7,12 @@ define([
 	"storage",
 	"settings",
 	"eventMgr",
-	'noteMgr',
+	'wikiMgr',
 	"fileSystem",
 	"DBRunner",
 	"classes/FileDescriptor",
 	"text!WELCOME.md"
-], function($, _, constants, core, utils, storage, settings, eventMgr, noteMgr, fileSystem, DBRunner, FileDescriptor, welcomeContent) {
+], function($, _, constants, core, utils, storage, settings, eventMgr, wikiMgr, fileSystem, DBRunner, FileDescriptor, welcomeContent) {
 
 	var fileMgr = {};
 
@@ -20,28 +20,39 @@ define([
 	fileMgr.currentFile = undefined;
 
 	// Set the current file and refresh the editor
-	fileMgr.selectFile = function(key) {
-		
+	fileMgr.selectFile = function() {
+
+		if(window.wiki.id){
+			wikiMgr.load(window.wiki.id, function(wiki){
+				var file = fileMgr.createFile(wiki.wiki);
+				file.update({id:wiki.id})
+				onFileSelected(file);
+			})
+		}else{
+			var file = fileMgr.createFile("");
+			onFileSelected(file);
+		}
+
 		if(fileMgr.currentFile && fileMgr.currentFile.key === key){
 			return;
 		}
-		
-		
- 		// TODO : selecte latest file or create new file
+
+
+ 		/*// TODO : selecte latest file or create new file
 		if(key === undefined) {
 			fileSystem.getLastFile(function(file){
 				if(!file){
 					file = fileMgr.createFile(constants.WELCOME_DOCUMENT_TITLE);
 				}
 				onFileSelected(file);
-				
+
 			});
-			return; 
+			return;
 
 		}
 
 		if(!fileMgr.currentFile || fileMgr.currentFile.key !== key) {
-			
+
 			DBRunner.run(function(db){
 				var tx = db.transaction("notes", "readwrite");
 				var store = tx.objectStore("notes");
@@ -50,46 +61,46 @@ define([
 					var note = request.result;
 					var file = new FileDescriptor();
 					file.note = note;
-					
+
 					onFileSelected(file);
 				};
 			});
-			
-		}
-		
+
+		}*/
+
 		function onFileSelected(file){
-			
+
 			function selectFile(file){
-				console.info("selected fiile " + file.key);
+				console.info("selected file " + file.key);
 				fileMgr.currentFile = file;
 				file.selectTime = new Date().getTime();
 				eventMgr.onFileSelected(file);
 				core.initEditor(file);
 			}
-			
+
 			if(file.guid && !file.localEdite){
 				noteMgr.downloadNote(file.guid, function(error, note){
-					
+
 					if(!error){
 						note.content = $(note.content).find('center').text();
 						file.update(note);
-						
+
 					}else{
 						eventMgr.onMessage('download note error with message ' + error + '! using local content');
 					}
-					
+
 					selectFile(file);
-					
+
 				});
 			}else{
 				selectFile(file);
 			}
-			
-			
-			
+
+
+
 		}
 
-		
+
 	};
 
 	fileMgr.createFile = function(content , callback) {

@@ -205,10 +205,10 @@ require([
 	"core",
 	"eventMgr",
 	'fileMgr',
-	'noteMgr',
 	'uiActions',
 	"css",
 	"rangy-cssclassapplier",
+	"wikiMgr",
 	themeModule
 ], function($, rangy, core, eventMgr) {
 

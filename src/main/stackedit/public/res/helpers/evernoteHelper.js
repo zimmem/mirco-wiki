@@ -102,11 +102,11 @@ define([ "jquery", 'underscore', "constants", "core", "utils", "storage",
 				return a.substr(0, a.length-1) + '/>';
 			});
 		console.info(html);
-		html = [ '<div style="font-size:16px;">', html, 
-		         '<center style="display:none;">', 
+		html = [ '<div style="font-size:16px;">', html,
+		         '<center style="display:none;">',
 		         markdown,
-				'</center>', 
-				'</div>' 
+				'</center>',
+				'</div>'
 				].join('');
 
 		var task = new AsyncTask();
@@ -201,11 +201,11 @@ define([ "jquery", 'underscore', "constants", "core", "utils", "storage",
 		}else{
 			_invokeShare();
 		}
-		
+
 		task.enqueue();
-		
+
 	};
-	
+
 	evernoteHelper.stopShare = function(guid, callback){
 		var task = new AsyncTask();
 		checkAuth(task);
@@ -226,12 +226,12 @@ define([ "jquery", 'underscore', "constants", "core", "utils", "storage",
 		});
 		task.enqueue();
 	};
-	
+
 
 	// ready 时尝试拉取用户信息
-	eventMgr.addListener('onReady', function() {
-		evernoteHelper.getUser();
-	});
+	// eventMgr.addListener('onReady', function() {
+	// 	evernoteHelper.getUser();
+	// });
 
 	function removeAttribute($root, attName) {
 		$root.removeAttr(attName);

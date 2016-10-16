@@ -6,13 +6,13 @@ define([
         'classes/FileDescriptor',
         'utils'
 ], function(_, eventMgr, helper, fileSystem, FileDescriptor, utils){
-	
+
 	var noteMgr = {};
-	
+
 	noteMgr.listNots = function(callback){
 		helper.listNotes(callback);
 	};
-	
+
 	noteMgr.refreshNotes = function(){
 		noteMgr.listNots(function(error, notes){
 			if(error){
@@ -24,12 +24,12 @@ define([
 				_.each(notes, function(note){
 					noteMap[note.guid] = note;
  				});
- 				
+
  				var fileMap = {};
 				_.each(files, function(file){
 					fileMap[file.guid] = file;
 				});
-				
+
 				var filesToCreate = [];
 				var filteredNotes = _.filter(notes, function(note){
 					return !fileMap[note.guid];
@@ -40,7 +40,7 @@ define([
 					// TODO 改面批量异步
 					filesToCreate.push(file);
 				});
-				
+
 				//update file
 				var filteredFile = _.filter(files, function(file){
 					return _.has(noteMap, file.guid);
@@ -52,30 +52,30 @@ define([
 						file.update(noteMap[file.guid]);
 					}
 				});
-				
+
 				eventMgr.onNotesRefresh();
-				
+
 			});
 		});
 	};
 	noteMgr.downloadNote = function(guid, callback){
 		helper.downloadNote(guid, callback);
 	};
-	
+
 	noteMgr.postNote = function(file, callback){
 		helper.postNote(file, callback);
 	};
-	
+
 	noteMgr.shareNote = function(file, callback){
 		helper.shareNote(file, callback);
 	};
-	
+
 	noteMgr.stopShare = function(guid, callback){
 		helper.stopShare(guid, callback);
 	};
-	
-	eventMgr.onNoteMgrCreated(noteMgr);
-	
+
+	//eventMgr.onNoteMgrCreated(noteMgr);
+
 	return noteMgr;
-	
+
 });
