@@ -7,11 +7,13 @@ define(["eventMgr",
 
 	wikiMgr.post = function (f, callback) {
 
-		helper.post(f)
+		helper.post(f, function (wiki) {
+			 f.update({id:wiki.id})
+		});
 		callback || callback();
 	}
-	
-	
+
+
 
 	wikiMgr.load = function (id, callback) {
 		helper.getWiki(id, callback);

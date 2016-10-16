@@ -58,8 +58,8 @@ define(["jquery",
 						wiki: markdown,
 						html: html
 					}),
-					success: function (result) {
-						console.info(result);
+					success: function (wiki) {
+						callback(wiki)
 						task.chain();
 					},
 					error: function () {
@@ -75,8 +75,6 @@ define(["jquery",
 				//callback();
 			});
 			task.enqueue();
-
-			if (callback) callback();
 		}
 
 		wikiHelper.getWiki = function(id, callback){

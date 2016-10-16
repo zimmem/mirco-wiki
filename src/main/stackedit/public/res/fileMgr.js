@@ -33,9 +33,9 @@ define([
 			onFileSelected(file);
 		}
 
-		if(fileMgr.currentFile && fileMgr.currentFile.key === key){
-			return;
-		}
+		// if(fileMgr.currentFile && fileMgr.currentFile.key === key){
+		// 	return;
+		// }
 
 
  		/*// TODO : selecte latest file or create new file
