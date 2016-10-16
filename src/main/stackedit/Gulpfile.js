@@ -227,7 +227,7 @@ gulp.task('clean', [
 ]);
 gulp.task('default', function(cb) {
 	runSequence([
-			'jshint',
+			//'jshint',
 			'requirejs',
 			'less',
 			'preview-less',

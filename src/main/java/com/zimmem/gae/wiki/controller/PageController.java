@@ -1,9 +1,9 @@
 package com.zimmem.gae.wiki.controller;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.Map;
-
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.zimmem.gae.wiki.model.WikiPage;
+import com.zimmem.gae.wiki.repository.WikiPageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
-import com.petebevin.markdown.MarkdownProcessor;
-import com.zimmem.gae.wiki.model.WikiPage;
-import com.zimmem.gae.wiki.repository.WikiPageRepository;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
 
 @Controller
 public class PageController {
@@ -28,8 +26,6 @@ public class PageController {
     @ResponseBody
     @RequestMapping(value = "/post_page", method = RequestMethod.POST)
     public WikiPage postPage(WikiPage wikiPage) throws IOException {
-        MarkdownProcessor process = new MarkdownProcessor();
-        wikiPage.setHtml(process.markdown(wikiPage.getWiki()));
         saveWikiPage(wikiPage);
         return wikiPage;
     }
@@ -38,7 +34,7 @@ public class PageController {
     public String editPage(Map<String, Object> model, @RequestParam("id") long id) {
         WikiPage page = wikiPageRepository.findOne(id);
         model.put("wikiPage", page);
-        return "/pageForm";
+        return "/editor";
     }
 
     @RequestMapping(value = "/create_page", method = RequestMethod.GET)
@@ -47,7 +43,7 @@ public class PageController {
         WikiPage page = new WikiPage();
         page.setParentId(parentId);
         model.put("wikiPage", page);
-        return "/pageForm";
+        return "/editor";
     }
 
     @RequestMapping("/fix")
@@ -60,7 +56,7 @@ public class PageController {
         return page;
     }
 
-    public void saveWikiPage(WikiPage wikiPage) {
+    private void saveWikiPage(WikiPage wikiPage) {
 
         if (wikiPage.getId() == null || wikiPage.getId() < 0) {
             addWikiPage(wikiPage);
