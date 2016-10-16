@@ -29,7 +29,7 @@ define([
 		comments: true,
 		highlighter: "prettify"
 	};
-	
+
 	markdownExtra.onLoadSettings = function() {
 		function hasExtension(extensionName) {
 			return _.some(markdownExtra.config.extensions, function(extension) {
@@ -111,7 +111,13 @@ define([
 			});
 		}
 		else if(markdownExtra.config.highlighter == "prettify") {
-			editor.hooks.chain("onPreviewRefresh", prettify.prettyPrint);
+			var previewContentsElt = document.getElementById('preview-contents');
+			editor.hooks.chain("onPreviewRefresh",function(){
+				_.each(previewContentsElt.querySelectorAll('.prettyprint > code'), function(elt) {
+					$(elt).parent().attr("data-plain", $(elt).text());
+				});
+				prettify.prettyPrint();
+			});
 		}
 		Markdown.Extra.init(converter, extraOptions);
 	};

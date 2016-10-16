@@ -24,11 +24,18 @@ define(["jquery",
 			var $clone = $('#preview-contents').clone();
 			$clone.find('#wmd-preview').remove();
 
-			applayCss(previewTheme.element.sheet.rules, $clone);
+			//applayCss(previewTheme.element.sheet.rules, $clone);
 
 			// remove all unsupport attribute
-			removeAttribute($clone, 'id');
-			removeAttribute($clone, 'class');
+			// removeAttribute($clone, 'id', ".prettyprint");
+			// removeAttribute($clone, 'class', ".prettyprint");
+
+
+			$clone.find(".prettyprint").each(function(i,e){
+				$(e).find("code").empty().text($(e).data("plain"));
+				removeAttribute($(e), "style");
+				removeAttribute($(e), "data-plain");
+			});
 
 			// 暂时这么处理 br吧
 			var html = $clone.html()
@@ -37,7 +44,7 @@ define(["jquery",
 			// 	return a.substr(0, a.length-1) + '/>';
 			// });
 
-
+			console.info(html)
 
 			var task = new AsyncTask();
 			task.onRun(function () {
@@ -94,10 +101,13 @@ define(["jquery",
 			task.enqueue();
 		}
 
-		function removeAttribute($root, attName) {
+		function removeAttribute($root, attName, excludeSelector) {
+			if(excludeSelector && $root.is(excludeSelector)){
+				return;
+			}
 			$root.removeAttr(attName);
 			$root.children().each(function (i, e) {
-				removeAttribute($(e), attName);
+				removeAttribute($(e), attName,excludeSelector);
 			});
 		}
 
