@@ -2,16 +2,21 @@ $metas.add("author",$!{article.editor.nickname})
 $metas.add("keywords",$!{article.title})
 #set($title=$esc.html($!{article.title}))
 
-#importCss("/static/google-code-prettify/prettify.css")
+#importCss("/static/google-code-prettify/desert.css")
 #importJavascript("/static/google-code-prettify/prettify.js")
+#importJavascript("//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML")
 #importJavascript("/static/js/article-view.js")
+
+
 <article class="article">
     <header class="page-header">
-      <h1>$esc.html($!{article.title}) </h1>
-      <small>Added By <a href="$!metadata.getSysProp("author.profile.url")">$!{article.creater.nickname}</a>, last edited by <a href="$!metadata.getSysProp("author.profile.url")">$!{article.editor.nickname}</a> on $!{article.modifiedTime}</small>
+        <h1>$esc.html($!{article.title})</h1>
+        <small>Added By <a href="$!metadata.getSysProp("author.profile.url")">$!{article.creater.nickname}</a>, last
+            edited by <a href="$!metadata.getSysProp("author.profile.url")">$!{article.editor.nickname}</a>
+            on $!{article.modifiedTime}</small>
     </header>
     <div class="wiki-content">
-    	$!{article.html}
+        $!{article.html}
     </div>
 </article>
 ##if($children && $children.size()>0)
@@ -21,12 +26,18 @@ $metas.add("keywords",$!{article.title})
 #parse("widget/disqus.vm")
 
 <!-- Place this render call where appropriate -->
-    <script type="text/javascript">
-      window.___gcfg = {lang: 'zh-CN'};
+<script type="text/javascript">
 
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
+    window.___gcfg = {lang: 'zh-CN'};
+
+    (function () {
+        var po = document.createElement('script');
+        po.type = 'text/javascript';
+        po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(po, s);
+    })();
+
+
 </script>

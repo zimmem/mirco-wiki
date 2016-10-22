@@ -1,8 +1,10 @@
 package com.zimmem.gae.wiki.controller;
 
-import java.util.List;
-import java.util.Map;
-
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.zimmem.gae.wiki.model.WikiPage;
+import com.zimmem.gae.wiki.repository.WikiPageRepository;
+import com.zimmem.springframework.web.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,12 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
-import com.petebevin.markdown.MarkdownProcessor;
-import com.zimmem.gae.wiki.model.WikiPage;
-import com.zimmem.gae.wiki.repository.WikiPageRepository;
-import com.zimmem.springframework.web.exception.ResourceNotFoundException;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ArticleController {
@@ -64,8 +62,6 @@ public class ArticleController {
 
     @RequestMapping(value = "/preview", method = RequestMethod.POST)
     public String preview(WikiPage wikiPage, Map<String, Object> model) {
-        MarkdownProcessor process = new MarkdownProcessor();
-        wikiPage.setHtml(process.markdown(wikiPage.getWiki()));
         wikiPage.setCreater(userService.getCurrentUser());
         wikiPage.setEditor(UserServiceFactory.getUserService().getCurrentUser());
         model.put("article", wikiPage);
