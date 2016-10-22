@@ -1,2 +1,8 @@
 .*
 target
+src/main/stackedit/node_modules/
+src/main/stackedit/public/res/bower-libs/
+filters/
+*.log
+*.iml
+src/main/stackedit/public/res-min/

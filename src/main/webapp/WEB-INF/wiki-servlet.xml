@@ -1,113 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"  xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="
-        http://www.springframework.org/schema/beans 
-        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<context:component-scan base-package="com.zimmem.gae.wiki.controller" />
-	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
-		<property name="removeSemicolonContent" value="false" />
-		<!-- <property name="defaultHandler"> <bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" /> </property> -->
-	</bean>
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"></bean>
+    <context:component-scan base-package="com.zimmem.gae.wiki.controller"/>
 
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-		<property name="cacheSeconds" value="0" />
-		<property name="messageConverters">
-			<list>
-				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
-				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
-				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
-					<property name="supportedMediaTypes">
-						<list>
-							<value>text/plain;charset=UTF-8</value>
-						</list>
-					</property>
-				</bean>
-				<bean class="org.springframework.http.converter.FormHttpMessageConverter" />
-				<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
-			</list>
-		</property>
-	</bean>
+    <bean id="handlerMapping"
+          class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="removeSemicolonContent" value="false"/>
+        <!-- <property name="defaultHandler"> <bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" /> </property> -->
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"/>
 
-	<bean id="multipartResolver" class="com.zimmem.spring.web.ext.multipart.StreamingMultipartResolver">
-
-		<property name="maxUploadSize" value="20000000" />
-	</bean>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+            <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
 
-	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+    <bean id="multipartResolver" class="com.zimmem.spring.web.ext.multipart.StreamingMultipartResolver">
 
-	<bean name="id" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-
-	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-		<property name="resourceLoaderPath" value="/WEB-INF/velocity/" />
-		<property name="velocityProperties">
-			<props>
-				<prop key="directive.foreach.counter.name">loopCounter</prop>
-				<prop key="directive.foreach.counter.initial.value">0</prop>
-				<prop key="input.encoding">utf-8</prop>
-				<prop key="output.encoding">utf-8</prop>
-				<prop key="velocimacro.library">macro/macro.vm</prop>
-				<prop key="eventhandler.referenceinsertion.class">com.zimmem.velocity.reference.DateReference</prop>
-				<!-- <prop key="eventhandler.referenceinsertion.class">com.zimmem.velocity.reference.AutoEascepeReference</prop> -->
-				<!--<prop key="velocimacro.library">macro/macro.vm</prop> -->
-			</props>
-		</property>
-	</bean>
-
-	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="order" value="1" />
-		<property name="contentNegotiationManager">
-			<bean class="org.springframework.web.accept.ContentNegotiationManager">
-				<constructor-arg>
-					<bean class="org.springframework.web.accept.PathExtensionContentNegotiationStrategy">
-						<constructor-arg>
-							<map>
-								<entry key="json" value="application/json" />
-							</map>
-						</constructor-arg>
-					</bean>
-				</constructor-arg>
-			</bean>
-		</property>
+        <property name="maxUploadSize" value="20000000"/>
+    </bean>
 
 
-		<property name="defaultViews">
-			<list>
-				<!-- JSON View -->
-				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-			</list>
-		</property><!-- <property name="viewResolvers"> <list> </list> </property> -->
-	</bean>
-	<bean id="velocityView" class="com.zimmem.springframework.web.servlet.view.velocity.COCVelocityLayoutVeiwResolver">
-		<property name="suffix" value=".vm" />
-		<property name="exposeSpringMacroHelpers" value="true" />
-		<property name="layouts" value="/layout" />
-		<property name="dateToolAttribute" value="dateTool" />
-		<property name="contentType">
-			<value>text/html;charset=UTF-8</value>
-		</property>
-		<property name="toolboxConfigLocation" value="WEB-INF/velocity-toolbox.xml" />
-		<property name="attributesMap">
-			<map>
-				<entry key="gaeUser">
-					<bean class="com.zimmem.gae.wiki.viewtools.GaeUserTools" />
-				</entry>
-				<entry key="metadata" value-ref="metadata" />
-			</map>
-		</property>
-	</bean>
-	<bean id="metadata" class="com.zimmem.gae.wiki.config.Metadata" />
-	
-	
-	<mvc:interceptors>
-		<ref bean="staticResourceTool"/>
-	</mvc:interceptors>
-	
-	<bean id="staticResourceTool" class="com.zimmem.gae.wiki.viewtools.StaticResourceTool"></bean>
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+
+
+    <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/velocity/"/>
+        <property name="velocityProperties">
+            <props>
+                <prop key="directive.foreach.counter.name">loopCounter</prop>
+                <prop key="directive.foreach.counter.initial.value">0</prop>
+                <prop key="input.encoding">utf-8</prop>
+                <prop key="output.encoding">utf-8</prop>
+                <prop key="velocimacro.library">macro/macro.vm</prop>
+                <prop key="eventhandler.referenceinsertion.class">com.zimmem.velocity.reference.DateReference</prop>
+                <!-- <prop key="eventhandler.referenceinsertion.class">com.zimmem.velocity.reference.AutoEascepeReference</prop> -->
+                <!--<prop key="velocimacro.library">macro/macro.vm</prop> -->
+            </props>
+        </property>
+    </bean>
+
+    <bean id="velocityView" class="com.zimmem.springframework.web.servlet.view.velocity.COCVelocityLayoutVeiwResolver">
+        <property name="suffix" value=".vm"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="layouts" value="/layout"/>
+        <property name="dateToolAttribute" value="dateTool"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="toolboxConfigLocation" value="WEB-INF/velocity-toolbox.xml"/>
+        <property name="attributesMap">
+            <map>
+                <entry key="gaeUser">
+                    <bean class="com.zimmem.gae.wiki.viewtools.GaeUserTools"/>
+                </entry>
+                <entry key="metadata" value-ref="metadata"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="metadata" class="com.zimmem.gae.wiki.config.Metadata"/>
+
+
+    <mvc:interceptors>
+        <ref bean="staticResourceTool"/>
+    </mvc:interceptors>
+
+    <bean id="staticResourceTool" class="com.zimmem.gae.wiki.viewtools.StaticResourceTool"/>
 </beans>

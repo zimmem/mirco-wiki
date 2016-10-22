@@ -1,0 +1,9 @@
+<!doctype html>
+<html>
+<head>
+	 <link href="css/fontello.css" media="all" rel="stylesheet" />
+</head>
+<body>
+	<i class="icon-evernote"></i>
+</body>	
+</html>

@@ -1,20 +1,14 @@
 package com.zimmem.gae.wiki.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.appengine.api.datastore.Text;
+import com.google.appengine.api.users.User;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.codehaus.jackson.annotate.JsonIgnore;
-
-import com.google.appengine.api.datastore.Text;
-import com.google.appengine.api.users.User;
 
 @Entity
 public class WikiPage implements Serializable {
