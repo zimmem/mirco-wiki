@@ -16,6 +16,7 @@
 	<static-files>
 		<include path="/favicon.ico" />
 		<include path="/static/**.*" />
+		<include path="/res-min/**.*" />
 		<include path="/robots.txt" />
 		<include path="/*.html" />
 	</static-files>
