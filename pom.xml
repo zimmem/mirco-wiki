@@ -385,7 +385,20 @@
 					<pushHotfixes>false</pushHotfixes>
 					<pushReleases>false</pushReleases>
 					<allowUntracked>true</allowUntracked>
+					<flowInitContext>
+						<versionTagPrefix>version-</versionTagPrefix>
+					</flowInitContext>
 				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>release-finish</goal>
+						</goals>
+						<configuration>
+							<useReleaseProfile>true</useReleaseProfile>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<resources>
@@ -435,13 +448,6 @@
 
 	<profiles>
 
-		<!-- We can configure our integration server to activate this profile and perform gae:deploy, thus uploading latest snapshot to the http://1.latest.<applicationName>.appspot.com automatically -->
-		<profile>
-			<id>integration-build</id>
-			<properties>
-				<gae.application.version>stage</gae.application.version>
-			</properties>
-		</profile>
 
 		<profile>
 			<id>dev</id>
