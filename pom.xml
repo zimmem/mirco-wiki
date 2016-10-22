@@ -439,6 +439,8 @@
 		<gae.version>1.9.42</gae.version>
 		<!-- Upload to http://test.latest.<applicationName>.appspot.com by default -->
 		<gae.application.version>${maven.build.timestamp}</gae.application.version>
+		<maven.build.timestamp.format>yyyy-MM-dd_HH_mm</maven.build.timestamp.format>
+
 		<gae.home>
 			${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk
 		</gae.home>
@@ -520,6 +522,9 @@
 						<artifactId>maven-war-plugin</artifactId>
 						<version>2.4</version>
 						<configuration>
+							<filters>
+								<filter>${mirco.wiki.filter}</filter>
+							</filters>
 							<webResources>
 								<resource>
 									<directory>${basedir}/src/main/webapp/WEB-INF</directory>
