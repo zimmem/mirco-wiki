@@ -502,7 +502,7 @@
 			</activation>
 
 			<properties>
-				<mirco.wiki.filter>${user.home}/mirco-wiki/release.properties</mirco.wiki.filter>
+				<mirco.wiki.filter>filters/release.properties</mirco.wiki.filter>
 			</properties>
 
 			<build>
