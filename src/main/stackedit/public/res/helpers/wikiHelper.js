@@ -37,6 +37,20 @@ define(["jquery",
 				removeAttribute($(e), "data-plain");
 			});
 
+			$clone.find("script").each(function(){
+				var $this = $(this);
+                if($this.attr("type") == "math/tex"){
+					$this.replaceWith( "$" + $this.text() +"$")
+				}else if($this.attr("type") == "math/tex; mode=display"){
+					$this.replaceWith( "$$" + $this.text() +"$$")
+				}
+
+			})
+
+			$clone.find(".MathJax_Display").remove();
+			$clone.find(".MathJax_Preview").remove();
+			$clone.find(".MathJax").remove();
+
 			// 暂时这么处理 br吧
 			var html = $clone.html()
 			//.replace(/<br>/g, "<br/>")
