@@ -385,6 +385,8 @@
 					<pushHotfixes>false</pushHotfixes>
 					<pushReleases>false</pushReleases>
 					<allowUntracked>true</allowUntracked>
+					<noFeatureBuild>true</noFeatureBuild>
+					<noReleaseBuild>true</noReleaseBuild>
 					<flowInitContext>
 						<versionTagPrefix>version-</versionTagPrefix>
 					</flowInitContext>
