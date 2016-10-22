@@ -5,7 +5,7 @@
 	<!-- The Basics -->
 	<groupId>com.zimmem</groupId>
 	<artifactId>mirco.wiki</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>gae.wiki</name>
