@@ -4,7 +4,7 @@ define([
     "utils",
     "classes/Extension",
     "fileSystem"
-    
+
 ], function($, _, utils, Extension,  fileSystem) {
 
     var documentPanel = new Extension("documentPanel", 'Document Panel');
@@ -13,12 +13,12 @@ define([
     documentPanel.onFileMgrCreated = function(fileMgrParameter) {
         fileMgr = fileMgrParameter;
     };
-    
+
     var noteMgr;
     documentPanel.onNoteMgrCreated = function(theNoteMgr){
     	noteMgr = theNoteMgr;
     };
-    
+
 
 //    var folderEltTmpl = [
 //        '<a href="#"',
@@ -43,7 +43,7 @@ define([
         '   <%= fileDesc.title %>',
         '</a>',
     ].join('');
-    
+
 
     var panelElt;
     var documentListElt;
@@ -52,7 +52,7 @@ define([
     var $documentListFilteredElt;
     var selectedFileDesc;
     var refreshPanel = _.debounce(function() {
-    	
+
     	fileSystem.listFiles(function(files){
     		// List orphan documents
             var orphanDocumentList = _.filter(files, function(fileDesc) {
@@ -97,7 +97,7 @@ define([
     documentPanel.onFileDeleted = refreshPanel;
     documentPanel.onTitleChanged = refreshPanel;
     documentPanel.onNotesRefresh = refreshPanel;
-    
+
     // Filter for search input in file selector
     var panelContentElt;
     var previousFilterValue = '';
@@ -126,7 +126,7 @@ define([
         $documentListFilteredElt.removeClass('hide');
         $documentListElt.addClass('hide');
     }
-    
+
        documentPanel.onReady = function() {
         panelElt = document.querySelector('.document-panel');
         panelContentElt = panelElt.querySelector('.panel-content');
@@ -154,11 +154,10 @@ define([
         $filterInputElt.bind("propertychange keyup input paste", function() {
             filterFiles($filterInputElt.val());
         });
-        
+
         $('.action-fresh-notes').click(function(e){
         	e.stopPropagation();
         	$(this).find('.icon-refresh').addClass('spin');
-        	noteMgr.refreshNotes();
         	return false;
         });
 

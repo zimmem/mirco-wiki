@@ -1,5 +1,5 @@
 /* desert scheme ported from vim to google prettify */
-pre.prettyprint {  padding: 8px; display: block; background-color: #333 ; border: 1px solid #e1e1e8;}
+pre.prettyprint {display: block; background-color: #222 ; border: 1px solid #e1e1e8; padding: 0 0 0 15px;}
 pre .nocode { background-color: none; color: #000 }
 pre .str { color: #ffa0a0 } /* string  - pink */
 pre .kwd { color: #f0e68c; font-weight: bold }
@@ -14,7 +14,8 @@ pre .atv { color: #ffa0a0 } /* attribute value - pink */
 pre .dec { color: #98fb98 } /* decimal         - lightgreen */
 
 /* Specify class=linenums on a pre to get line numbering */
-ol.linenums { margin-top: 0; margin-bottom: 0; color: #AEAEAE } /* IE indents via margin-left */
+ol.linenums { margin-top: 0; margin-bottom: 0; color: #555;   background-color: #333 ;padding: 15px 0 15px 0px; } /* IE indents via margin-left */
+ol.linenums li{padding-left: 10px; line-height: 1.5em;}
 /*li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }*/
 /* Alternate shading for lines */
 li.L1,li.L3,li.L5,li.L7,li.L9 { }

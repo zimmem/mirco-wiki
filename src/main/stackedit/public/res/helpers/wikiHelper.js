@@ -32,7 +32,7 @@ define(["jquery",
 
 
 			$clone.find(".prettyprint").each(function(i,e){
-				$(e).find("code").empty().text($(e).data("plain"));
+				$(e).text($(e).data("plain"));
 				removeAttribute($(e), "style");
 				removeAttribute($(e), "data-plain");
 			});
